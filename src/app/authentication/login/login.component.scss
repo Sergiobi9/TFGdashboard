@@ -1,15 +1,28 @@
 .login-input {
-  padding: 20px 10px;
+  padding: 15px 20px 15px 60px;
   border: none;
-  border: solid 1px #c0c0c0;
-  width: 350px;
+  width: 100%;
   margin: 20px 0px;
-  border-radius: 20px;
-  font-size: 18px;
+  border-radius: 25px;
+  background: #e6e6e6;
+  color: #666666;
+  font-size: 15px;
+}
+
+.login-icon {
+  position: absolute;
+  top: 35px;
+  color: #666666;
+  left: 20;
+}
+
+.input-row {
+  display: flex;
+  position: relative;
 }
 
 .login-background {
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  background: linear-gradient(-135deg, #eecda3, #ef629f);
   display: table;
   align-items: center;
   margin: auto;
@@ -19,35 +32,76 @@
   justify-content: center;
 }
 
+.login-button {
+  padding: 14px 20px;
+  text-align: center;
+  width: fit-content;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  background: rgb(87, 184, 70);
+  transition: 0.5s;
+  width: 100%;
+  font-family: "Montserrat";
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login-forgot-text {
+  font-family: "Poppins";
+  font-size: 12px;
+  color: #999999;
+}
+
+.login-create-account {
+  font-family: "Poppins";
+  font-size: 12px;
+  color: #999999;
+  margin-top: 80px;
+}
+
+.login-create-account span {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-forgot-text span {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: #3d8131;
+}
+
 .login-card-container {
   width: 960px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 177px 130px 33px 95px;
+  padding: 80px 80px 30px 80px;
 }
 
-.login-inputs-container{
-     text-align: center; margin: 0px; justify-content: space-between;
+.login-inputs-container {
+  text-align: center;
+  margin: 0px;
+  justify-content: space-between;
 }
 
-.left-part{
-    width: 316px
+.left-part {
+  max-width: 485px;
 }
 
-.right-part{
-    width: 219px;
+.right-part {
+  width: 290px;
 }
 
-.login-inputs-container .login-title-text{
-    font-size: 24px;
-    font-family: 'Poppins';
-    color: #333
+.login-inputs-container .login-title-text {
+  font-size: 24px;
+  font-family: "Poppins";
+  color: #333;
 }
