@@ -6,14 +6,15 @@
   border-radius: 25px;
   background: #e6e6e6;
   color: #666666;
+  font-family: 'Poppins';
   font-size: 15px;
 }
 
 .login-icon {
   position: absolute;
-  top: 35px;
+  top: 38px;
   color: #666666;
-  left: 20;
+  left: 25px;
 }
 
 .input-row {
@@ -22,7 +23,9 @@
 }
 
 .login-background {
-  background: linear-gradient(-135deg, #141e30, #243b55);
+  background: url('https://images.dailyhive.com/20161031092722/Post-Malone-DHV-Brandon-Artis-Photography-8.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
   display: table;
   align-items: center;
   margin: auto;
@@ -75,7 +78,6 @@
 }
 
 .login-card-container {
-  width: 960px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
