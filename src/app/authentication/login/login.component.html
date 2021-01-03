@@ -17,9 +17,9 @@
             </div>
 
             <button class="login-button" style="margin-top: 25px;">Iniciar sesión</button>
-            <p class="login-forgot-text">¿No te acuerdas de tu <span (click)="requestResetUser()">usuario</span> o <span (click)="requestResetUser()">contraseña</span>?</p>
+            <p class="login-forgot-text" (click)="requestResetUser()">¿No te acuerdas de tu <span>usuario</span> o <span (click)="requestResetUser()">contraseña</span>?</p>
 
-            <p class="login-create-account">Crea una cuenta como <span (click)="createAccount()">artista</span></p>
+            <p class="login-create-account" (click)="createAccount()">Crea una cuenta como <span>artista</span></p>
         </div>
     </div>
 </div>
