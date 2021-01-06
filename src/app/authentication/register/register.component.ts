@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
 import {
   faUser,
@@ -14,6 +14,7 @@ import { GENDER_LIST } from "src/app/constants/gender/gender";
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
 })
+
 export class RegisterComponent implements OnInit {
   faUser = faUser;
   faLock = faLock;

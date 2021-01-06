@@ -15,6 +15,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
+import { PagesModule } from './pages/pages.module';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -22,10 +25,8 @@ import { MatSelectModule } from '@angular/material/select';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
     NotFoundComponent,
-    HeaderComponent,
-    FooterComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    MatSelectModule
+    MatSelectModule,
+    PagesModule,
+    MatStepperModule,
+    MatIconModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

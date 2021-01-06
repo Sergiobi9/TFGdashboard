@@ -1,0 +1,35 @@
+.header-title{
+    width: 100%;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.header-title p {
+    font-size: 24px;
+    color: #999;
+    font-family: 'Poppins';
+}
+
+.mat-step-header .mat-step-icon-selected{
+    background-color: black !important;
+    color: #fff !important;
+}
+
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: #999;
+    color: #fff;
+}
+
+.mat-step-header .mat-step-icon{
+    background-color: #999;
+    color: transparent;
+}
+
+
+.mat-step-header {
+    font-family: 'Poppins';
+}
+
+.mat-step-header .mat-step-label{
+    font-size: 18px;
+}
