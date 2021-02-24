@@ -106,10 +106,20 @@
 
 .register-icon-back {
   position: absolute;
-  top: -60px;
   color: #666666;
-  left: -55px;
+  top: -70px;
+  left: -40px;
   cursor: pointer;
+}
+
+.progress-bar {
+  background-color: black;
+}
+
+.register-progress-bar {
+  top: -70px;
+  width: 100%;
+  position: absolute;
 }
 
 .input-row {
@@ -180,7 +190,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 80px;
+  padding: 100px 60px 60px 60px;
 }
 
 .register-inputs-container {

@@ -43,6 +43,9 @@ export class RegisterComponent implements OnInit {
   choosePhotoInput: any = null;
   mbLimit = 1000000;
 
+  progressBar = 0;
+  progressBarWidth = "0%";
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -50,6 +53,8 @@ export class RegisterComponent implements OnInit {
   }
 
   proceedSignUpStep() {
+    this.progressBar = this.progressBar + 20;
+    this.progressBarWidth = this.progressBar + "%"
     switch (this.registerStep) {
       case 1:
         if (!this.isArtistNameCorrect(this.registerArtistName)) {

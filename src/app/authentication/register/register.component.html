@@ -1,6 +1,9 @@
 <div class="register-background">
-    <div class="register-card-container">
+    <div class="register-card-container" style="position: relative;">
         <div class="register-inputs-container right-part">
+            <div class="progress register-progress-bar">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{width:progressBarWidth}" aria-valuenow=0 aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
             <fa-icon class="register-icon-back" [icon]="faLongArrowAltLeft" (click)="goBackSignUpStep()"></fa-icon>
             <p class="register-title-text">Registrar artista</p>
 
