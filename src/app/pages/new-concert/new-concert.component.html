@@ -1,0 +1,66 @@
+<h1 style="margin-bottom: 50px;">Add new concert</h1>
+
+<div
+    style="width: 80%; background-color: white; padding: 20px; border-radius: 20px; justify-content: center; margin: auto;">
+
+    <div style="margin: 25px">
+        <h4>Descripción y fecha</h4>
+        <div style="display: flex; width: 100%;">
+            <div style="display: block; width: 50%;">
+                <p style="margin-top: 35px;">Nombre del concierto</p>
+                <input class="row-input" type="text" placeholder="Nombre del concierto" name="name" [(ngModel)]="name">
+            </div>
+            <div style="display: block; width: 50%;">
+                <p style="margin-top: 35px;">Fecha</p>
+                <div class="register-birthday-input-container">
+                    <input class="birthday-input" matInput [matDatepicker]="picker" placeholder="Fecha del evento"
+                        disabled>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display: flex; width: 100%;">
+            <div style="display: block; width: 50%;">
+                <p style="margin-top: 35px;">Descripción</p>
+                <textarea class="row-input" type="text" placeholder="Descripción de presentación" name="name"
+                    style="height: 100px;" [(ngModel)]="name"></textarea>
+            </div>
+            <div style="display: block;  width: 50%;">
+                <p style="margin-top: 35px;">Descripción extra</p>
+                <textarea class="row-input" type="text" placeholder="Descripción de presentación extra" name="name"
+                    style="height: 100px;" [(ngModel)]="name"></textarea>
+            </div>
+        </div>
+
+        <h4 style="margin-top: 50px; margin-bottom: 25px;">Ubicación</h4>
+        <div style="border-radius: 20px;width: 100%;">
+            <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" style="width: 100%; height: 50vh; border-radius: 20px;">
+                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            </agm-map>
+        </div>
+
+        <h4 style="margin-top: 50px; margin-bottom: 25px;">Imagenes de la ubicación</h4>
+        <p>Puedes subir imagenes de la ubicación para que los usuarios puedan ver el lugar que se va a dar a cabo el concierto (opcional)</p>
+        <div style="width: 60%; height: 200px; border-radius: 20px; border: dotted 1px #828282; display: flex; text-align: center; margin: 35px auto 35px auto; justify-content: center; align-items: center; ">
+            <fa-icon [icon]="faCloudUploadAlt" style="font-size: 45px; color: #828282;"></fa-icon>
+        </div>
+
+        <h4 style="margin-top: 50px; margin-bottom: 25px;">Entradas</h4>
+        <div style="display: flex; width: 100%;">
+            <div style="display: block; width: 50%;">
+                <p style="margin-top: 35px;">Numero de entradas</p>
+                <input class="row-input" type="number" placeholder="Numero de entradas" name="name" [(ngModel)]="name">
+            </div>
+            <div style="display: block; width: 50%;">
+                <p style="margin-top: 35px;">Precio</p>
+                <input class="row-input" type="number" placeholder="Precio" name="name" [(ngModel)]="name">
+            </div>
+        </div>
+        <h4 style="margin-top: 25px; margin-bottom: 20px;">Artistas que participaran</h4>
+
+    </div>
+
+</div>

@@ -1,0 +1,132 @@
+.login-input {
+  padding: 15px 20px 15px 60px;
+  border: none;
+  width: 100%;
+  margin: 5px 0px 25px 0px;
+  border-radius: 25px;
+  background: #e6e6e6;
+  color: #666666;
+  font-family: "Poppins";
+  font-size: 15px;
+}
+
+.login-icon {
+  position: absolute;
+  top: 20px;
+  color: #666666;
+  left: 25px;
+}
+
+.input-row {
+  display: flex;
+  position: relative;
+}
+
+.login-background {
+  //background: url('https://images.dailyhive.com/20161031092722/Post-Malone-DHV-Brandon-Artis-Photography-8.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  display: table;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.login-button {
+  padding: 17px 20px;
+  text-align: center;
+  width: fit-content;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  background: #141e30;
+  transition: 0.5s;
+  width: 100%;
+  font-family: "Poppins";
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login-forgot-text {
+  font-family: "Poppins";
+  font-size: 12px;
+  margin-top: 10px;
+  color: #999999;
+  cursor: pointer;
+}
+
+.login-create-account {
+  font-family: "Poppins";
+  font-size: 12px;
+  color: #999999;
+  cursor: pointer;
+  margin-top: 40px;
+}
+
+.login-create-account span {
+  font-weight: 600;
+}
+
+.login-forgot-text span {
+  font-weight: 600;
+}
+
+.login-button:hover {
+  background: #243b55;
+}
+
+.login-card-container {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 80px 80px 30px 80px;
+}
+
+.login-inputs-container {
+  text-align: center;
+  margin: 0px;
+  justify-content: space-between;
+}
+
+.left-part {
+  max-width: 485px;
+}
+
+.right-part {
+  width: 290px;
+}
+
+.login-inputs-container .login-title-text {
+  font-size: 20px;
+  font-family: "Poppins";
+  color: #333;
+}
+
+::ng-deep .nb-theme-default nb-card-header {
+  display: none !important;
+}
+
+::ng-deep
+  nb-layout
+  .layout
+  .layout-container
+  .content
+  .columns
+  nb-layout-column {
+  padding: 0px !important;
+}
+
+::ng-deep nb-card {
+  height: 100vh !important;
+}
+
+::ng-deep .nb-theme-default nb-card-body {
+  padding: 0px !important;
+}

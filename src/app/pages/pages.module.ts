@@ -1,20 +1,29 @@
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { FooterComponent } from "../components/footer/footer.component";
-import { HeaderComponent } from "../components/header/header.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { PagesRoutingModule } from "./pages-routing.module";
-import { PagesComponent } from "./pages.component";
+import { NgModule } from '@angular/core';
+import { NbMenuModule } from '@nebular/theme';
 
-const PAGES_COMPONENTS = [
-    PagesComponent,
-  ];
+import { ThemeModule } from '../@theme/theme.module';
+import { PagesComponent } from './pages.component';
+import { ECommerceModule } from './e-commerce/e-commerce.module';
+import { PagesRoutingModule } from './pages-routing.module';
+import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { HomeModule } from './home/home.module';
+import { ConcertsModule } from './concerts/concerts.module';
+import { NewConcertModule } from './new-concert/new-concert.module';
 
 @NgModule({
-  imports: [PagesRoutingModule],
-
-  providers: [],
-  declarations: [...PAGES_COMPONENTS, HeaderComponent, FooterComponent],
-  entryComponents: [],
+  imports: [
+    PagesRoutingModule,
+    ThemeModule,
+    NbMenuModule,
+    HomeModule,
+    ConcertsModule,
+    NewConcertModule,
+    ECommerceModule,
+    MiscellaneousModule,
+  ],
+  declarations: [
+    PagesComponent,
+  ],
 })
-export class PagesModule {}
+export class PagesModule {
+}

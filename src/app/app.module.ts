@@ -1,47 +1,59 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './@core/core.module';
+import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { LoginComponent } from './authentication/login/login.component';
-import { RegisterComponent } from './authentication/register/register.component';
+import { AppRoutingModule } from './app-routing.module';
+import {
+  NbChatModule,
+  NbDatepickerModule,
+  NbDialogModule,
+  NbMenuModule,
+  NbSidebarModule,
+  NbToastrModule,
+  NbWindowModule,
+} from '@nebular/theme';
+import { LoginComponent } from './login/login.component';
+import { AuthorizatedGuard } from './guards/authorized.guard';
+import { StorageService } from './services/storage.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from './login/shared/authentication.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
-import { PagesModule } from './pages/pages.module';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatIconModule} from '@angular/material/icon';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    NotFoundComponent,
-    DashboardComponent
-  ],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    FormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     BrowserAnimationsModule,
-    MatSelectModule,
-    PagesModule,
-    MatStepperModule,
-    MatIconModule
+    HttpClientModule,
+    AppRoutingModule,
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    FormsModule,
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    CoreModule.forRoot(),
+    ThemeModule.forRoot(),
+    FontAwesomeModule
   ],
-  providers: [MatDatepickerModule],
-  bootstrap: [AppComponent]
+  providers: [AuthorizatedGuard, StorageService, AuthenticationService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
