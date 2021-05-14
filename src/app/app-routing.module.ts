@@ -12,12 +12,11 @@ import { LoginComponent } from "./login/login.component";
 import { AuthorizatedGuard } from "./guards/authorized.guard";
 
 export const routes: Routes = [
-  { path: "", component: LoginComponent, pathMatch: "full" },
   {
     path: "pages",
     loadChildren: () =>
       import("./pages/pages.module").then((m) => m.PagesModule),
-      canActivate:[AuthorizatedGuard]
+    canActivate: [AuthorizatedGuard],
   },
   {
     path: "auth",
@@ -49,7 +48,8 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: "**", component: LoginComponent },
+  { path: "", redirectTo: "pages", pathMatch: "full" },
+  { path: "**", redirectTo: "pages" },
 ];
 
 const config: ExtraOptions = {

@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     const loginObject: LoginObject = new LoginObject(this.email, this.password);
     this.auth.login(loginObject).pipe().subscribe((data: Session) =>{
       this.storage.setCurrentSession(data);
+      console.log("sucess")
       this.router.navigate(['/pages/home']);
     });
   }

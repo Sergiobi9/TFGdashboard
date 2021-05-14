@@ -9,6 +9,7 @@ import {
   NbSelectModule,
   NbListModule,
   NbIconModule,
+  NbDatepickerModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -50,6 +51,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NbListModule,
     NbIconModule,
     NbButtonModule,
+    NbDatepickerModule,
     MatNativeDateModule,
     FontAwesomeModule,
     MatDatepickerModule,
