@@ -1,6 +1,6 @@
-@import '../../@theme/styles/themes';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/breakpoints';
+@import "../../@theme/styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
 
 @include nb-install-component() {
   .solar-card nb-card-header {
@@ -13,4 +13,58 @@
       display: none;
     }
   }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  min-width: 350px;
+  min-height: 200px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.solo-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  min-width: 350px;
+  min-height: 250px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.login-button {
+  padding: 17px 20px;
+  text-align: center;
+  width: fit-content;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  background: #141e30;
+  transition: 0.5s;
+  width: 20%;
+  min-width: 200px;
+  font-family: "Poppins";
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.circle-ripple {
+  background-color: #dbdbdb;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  animation: ripple 1.5s linear infinite;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 3em rgba(#dbdbdb, 0.3), 0 0 0 5em rgba(#dbdbdb, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 5em rgba(#dbdbdb, 0.3), 0 0 0 8em rgba(#dbdbdb, 0);
+  }
+}
+
+.activity-table-element {
+  border-radius: 30px;
+  box-shadow: 0px 2px 18px 0px rgb(219, 219, 219);
 }
