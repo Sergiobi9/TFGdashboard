@@ -1,0 +1,369 @@
+<div class="login-background">
+    <div style="display: table;">
+        <h3 style="margin-bottom: 50px; text-align: center;">Registrate como artista</h3>
+        <div style="width: 100%; background: #F9F9F9; border-radius: 20px;">
+            <div style="height: 10px; border-radius: 20px; background: black; transition: 0.5s;"
+                [ngStyle]="{width: width}"></div>
+        </div>
+        <p style="text-align: center; margin-top: 25px;">Step {{step + 1}}/{{steps}}</p>
+        <div class="register-card-container" *ngIf="step === 0">
+            <div class="login-inputs-container right-part">
+                <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Nombre</p>
+                <div class="input-row">
+                    <input class="register-input" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="email">
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Apellidos</p>
+                <div class="input-row">
+                    <input class="register-input" type="text" placeholder="Apellidos" name="apellidos"
+                        [(ngModel)]="password">
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Email</p>
+                <div class="input-row">
+                    <input class="register-input" type="email" placeholder="Email" name="email" [(ngModel)]="password">
+                </div>
+
+                <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
+                <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
+            </div>
+        </div>
+
+        <div class="register-card-container" *ngIf="step === 1">
+            <div class="login-inputs-container right-part">
+                <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Contraseña</p>
+                <div class="input-row">
+                    <input class="register-input" type="password" placeholder="Contraseña" name="password"
+                        [(ngModel)]="password">
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Repetir contraseña</p>
+                <div class="input-row">
+                    <input class="register-input" type="password" placeholder="Repetir contraseña" name="repeatPassword"
+                        [(ngModel)]="password">
+                </div>
+                <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
+                <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
+            </div>
+
+        </div>
+
+        <div class="register-card-container" *ngIf="step === 2">
+            <div class="login-inputs-container right-part">
+                <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Fecha de nacimiento
+                </p>
+                <div class="input-row">
+                    <input class="register-input" nbInput placeholder="Selecciona fecha" [nbDatepicker]="formpicker">
+                    <nb-datepicker #formpicker></nb-datepicker>
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Genero</p>
+                <div class="input-row">
+                    <nb-select class="register-input">
+                        <nb-option value="0" style="font-family: Poppins; font-size: 15px;">Mujer</nb-option>
+                        <nb-option value="1" style="font-family: Poppins; font-size: 15px;">Hombre</nb-option>
+                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">No binario</nb-option>
+                    </nb-select>
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Pais</p>
+                <div class="input-row">
+                    <nb-select class="register-input">
+                        <nb-option value="AF">Afghanistan</nb-option>
+                        <nb-option value="AX">Åland Islands</nb-option>
+                        <nb-option value="AL">Albania</nb-option>
+                        <nb-option value="DZ">Algeria</nb-option>
+                        <nb-option value="AS">American Samoa</nb-option>
+                        <nb-option value="AD">Andorra</nb-option>
+                        <nb-option value="AO">Angola</nb-option>
+                        <nb-option value="AI">Anguilla</nb-option>
+                        <nb-option value="AQ">Antarctica</nb-option>
+                        <nb-option value="AG">Antigua and Barbuda</nb-option>
+                        <nb-option value="AR">Argentina</nb-option>
+                        <nb-option value="AM">Armenia</nb-option>
+                        <nb-option value="AW">Aruba</nb-option>
+                        <nb-option value="AU">Australia</nb-option>
+                        <nb-option value="AT">Austria</nb-option>
+                        <nb-option value="AZ">Azerbaijan</nb-option>
+                        <nb-option value="BS">Bahamas</nb-option>
+                        <nb-option value="BH">Bahrain</nb-option>
+                        <nb-option value="BD">Bangladesh</nb-option>
+                        <nb-option value="BB">Barbados</nb-option>
+                        <nb-option value="BY">Belarus</nb-option>
+                        <nb-option value="BE">Belgium</nb-option>
+                        <nb-option value="BZ">Belize</nb-option>
+                        <nb-option value="BJ">Benin</nb-option>
+                        <nb-option value="BM">Bermuda</nb-option>
+                        <nb-option value="BT">Bhutan</nb-option>
+                        <nb-option value="BO">Bolivia, Plurinational State of</nb-option>
+                        <nb-option value="BQ">Bonaire, Sint Eustatius and Saba</nb-option>
+                        <nb-option value="BA">Bosnia and Herzegovina</nb-option>
+                        <nb-option value="BW">Botswana</nb-option>
+                        <nb-option value="BV">Bouvet Island</nb-option>
+                        <nb-option value="BR">Brazil</nb-option>
+                        <nb-option value="IO">British Indian Ocean Territory</nb-option>
+                        <nb-option value="BN">Brunei Darussalam</nb-option>
+                        <nb-option value="BG">Bulgaria</nb-option>
+                        <nb-option value="BF">Burkina Faso</nb-option>
+                        <nb-option value="BI">Burundi</nb-option>
+                        <nb-option value="KH">Cambodia</nb-option>
+                        <nb-option value="CM">Cameroon</nb-option>
+                        <nb-option value="CA">Canada</nb-option>
+                        <nb-option value="CV">Cape Verde</nb-option>
+                        <nb-option value="KY">Cayman Islands</nb-option>
+                        <nb-option value="CF">Central African Republic</nb-option>
+                        <nb-option value="TD">Chad</nb-option>
+                        <nb-option value="CL">Chile</nb-option>
+                        <nb-option value="CN">China</nb-option>
+                        <nb-option value="CX">Christmas Island</nb-option>
+                        <nb-option value="CC">Cocos (Keeling) Islands</nb-option>
+                        <nb-option value="CO">Colombia</nb-option>
+                        <nb-option value="KM">Comoros</nb-option>
+                        <nb-option value="CG">Congo</nb-option>
+                        <nb-option value="CD">Congo, the Democratic Republic of the</nb-option>
+                        <nb-option value="CK">Cook Islands</nb-option>
+                        <nb-option value="CR">Costa Rica</nb-option>
+                        <nb-option value="CI">Côte d'Ivoire</nb-option>
+                        <nb-option value="HR">Croatia</nb-option>
+                        <nb-option value="CU">Cuba</nb-option>
+                        <nb-option value="CW">Curaçao</nb-option>
+                        <nb-option value="CY">Cyprus</nb-option>
+                        <nb-option value="CZ">Czech Republic</nb-option>
+                        <nb-option value="DK">Denmark</nb-option>
+                        <nb-option value="DJ">Djibouti</nb-option>
+                        <nb-option value="DM">Dominica</nb-option>
+                        <nb-option value="DO">Dominican Republic</nb-option>
+                        <nb-option value="EC">Ecuador</nb-option>
+                        <nb-option value="EG">Egypt</nb-option>
+                        <nb-option value="SV">El Salvador</nb-option>
+                        <nb-option value="GQ">Equatorial Guinea</nb-option>
+                        <nb-option value="ER">Eritrea</nb-option>
+                        <nb-option value="EE">Estonia</nb-option>
+                        <nb-option value="ET">Ethiopia</nb-option>
+                        <nb-option value="FK">Falkland Islands (Malvinas)</nb-option>
+                        <nb-option value="FO">Faroe Islands</nb-option>
+                        <nb-option value="FJ">Fiji</nb-option>
+                        <nb-option value="FI">Finland</nb-option>
+                        <nb-option value="FR">France</nb-option>
+                        <nb-option value="GF">French Guiana</nb-option>
+                        <nb-option value="PF">French Polynesia</nb-option>
+                        <nb-option value="TF">French Southern Territories</nb-option>
+                        <nb-option value="GA">Gabon</nb-option>
+                        <nb-option value="GM">Gambia</nb-option>
+                        <nb-option value="GE">Georgia</nb-option>
+                        <nb-option value="DE">Germany</nb-option>
+                        <nb-option value="GH">Ghana</nb-option>
+                        <nb-option value="GI">Gibraltar</nb-option>
+                        <nb-option value="GR">Greece</nb-option>
+                        <nb-option value="GL">Greenland</nb-option>
+                        <nb-option value="GD">Grenada</nb-option>
+                        <nb-option value="GP">Guadeloupe</nb-option>
+                        <nb-option value="GU">Guam</nb-option>
+                        <nb-option value="GT">Guatemala</nb-option>
+                        <nb-option value="GG">Guernsey</nb-option>
+                        <nb-option value="GN">Guinea</nb-option>
+                        <nb-option value="GW">Guinea-Bissau</nb-option>
+                        <nb-option value="GY">Guyana</nb-option>
+                        <nb-option value="HT">Haiti</nb-option>
+                        <nb-option value="HM">Heard Island and McDonald Islands</nb-option>
+                        <nb-option value="VA">Holy See (Vatican City State)</nb-option>
+                        <nb-option value="HN">Honduras</nb-option>
+                        <nb-option value="HK">Hong Kong</nb-option>
+                        <nb-option value="HU">Hungary</nb-option>
+                        <nb-option value="IS">Iceland</nb-option>
+                        <nb-option value="IN">India</nb-option>
+                        <nb-option value="ID">Indonesia</nb-option>
+                        <nb-option value="IR">Iran, Islamic Republic of</nb-option>
+                        <nb-option value="IQ">Iraq</nb-option>
+                        <nb-option value="IE">Ireland</nb-option>
+                        <nb-option value="IM">Isle of Man</nb-option>
+                        <nb-option value="IL">Israel</nb-option>
+                        <nb-option value="IT">Italy</nb-option>
+                        <nb-option value="JM">Jamaica</nb-option>
+                        <nb-option value="JP">Japan</nb-option>
+                        <nb-option value="JE">Jersey</nb-option>
+                        <nb-option value="JO">Jordan</nb-option>
+                        <nb-option value="KZ">Kazakhstan</nb-option>
+                        <nb-option value="KE">Kenya</nb-option>
+                        <nb-option value="KI">Kiribati</nb-option>
+                        <nb-option value="KP">Korea, Democratic People's Republic of</nb-option>
+                        <nb-option value="KR">Korea, Republic of</nb-option>
+                        <nb-option value="KW">Kuwait</nb-option>
+                        <nb-option value="KG">Kyrgyzstan</nb-option>
+                        <nb-option value="LA">Lao People's Democratic Republic</nb-option>
+                        <nb-option value="LV">Latvia</nb-option>
+                        <nb-option value="LB">Lebanon</nb-option>
+                        <nb-option value="LS">Lesotho</nb-option>
+                        <nb-option value="LR">Liberia</nb-option>
+                        <nb-option value="LY">Libya</nb-option>
+                        <nb-option value="LI">Liechtenstein</nb-option>
+                        <nb-option value="LT">Lithuania</nb-option>
+                        <nb-option value="LU">Luxembourg</nb-option>
+                        <nb-option value="MO">Macao</nb-option>
+                        <nb-option value="MK">Macedonia, the former Yugoslav Republic of</nb-option>
+                        <nb-option value="MG">Madagascar</nb-option>
+                        <nb-option value="MW">Malawi</nb-option>
+                        <nb-option value="MY">Malaysia</nb-option>
+                        <nb-option value="MV">Maldives</nb-option>
+                        <nb-option value="ML">Mali</nb-option>
+                        <nb-option value="MT">Malta</nb-option>
+                        <nb-option value="MH">Marshall Islands</nb-option>
+                        <nb-option value="MQ">Martinique</nb-option>
+                        <nb-option value="MR">Mauritania</nb-option>
+                        <nb-option value="MU">Mauritius</nb-option>
+                        <nb-option value="YT">Mayotte</nb-option>
+                        <nb-option value="MX">Mexico</nb-option>
+                        <nb-option value="FM">Micronesia, Federated States of</nb-option>
+                        <nb-option value="MD">Moldova, Republic of</nb-option>
+                        <nb-option value="MC">Monaco</nb-option>
+                        <nb-option value="MN">Mongolia</nb-option>
+                        <nb-option value="ME">Montenegro</nb-option>
+                        <nb-option value="MS">Montserrat</nb-option>
+                        <nb-option value="MA">Morocco</nb-option>
+                        <nb-option value="MZ">Mozambique</nb-option>
+                        <nb-option value="MM">Myanmar</nb-option>
+                        <nb-option value="NA">Namibia</nb-option>
+                        <nb-option value="NR">Nauru</nb-option>
+                        <nb-option value="NP">Nepal</nb-option>
+                        <nb-option value="NL">Netherlands</nb-option>
+                        <nb-option value="NC">New Caledonia</nb-option>
+                        <nb-option value="NZ">New Zealand</nb-option>
+                        <nb-option value="NI">Nicaragua</nb-option>
+                        <nb-option value="NE">Niger</nb-option>
+                        <nb-option value="NG">Nigeria</nb-option>
+                        <nb-option value="NU">Niue</nb-option>
+                        <nb-option value="NF">Norfolk Island</nb-option>
+                        <nb-option value="MP">Northern Mariana Islands</nb-option>
+                        <nb-option value="NO">Norway</nb-option>
+                        <nb-option value="OM">Oman</nb-option>
+                        <nb-option value="PK">Pakistan</nb-option>
+                        <nb-option value="PW">Palau</nb-option>
+                        <nb-option value="PS">Palestinian Territory, Occupied</nb-option>
+                        <nb-option value="PA">Panama</nb-option>
+                        <nb-option value="PG">Papua New Guinea</nb-option>
+                        <nb-option value="PY">Paraguay</nb-option>
+                        <nb-option value="PE">Peru</nb-option>
+                        <nb-option value="PH">Philippines</nb-option>
+                        <nb-option value="PN">Pitcairn</nb-option>
+                        <nb-option value="PL">Poland</nb-option>
+                        <nb-option value="PT">Portugal</nb-option>
+                        <nb-option value="PR">Puerto Rico</nb-option>
+                        <nb-option value="QA">Qatar</nb-option>
+                        <nb-option value="RE">Réunion</nb-option>
+                        <nb-option value="RO">Romania</nb-option>
+                        <nb-option value="RU">Russian Federation</nb-option>
+                        <nb-option value="RW">Rwanda</nb-option>
+                        <nb-option value="BL">Saint Barthélemy</nb-option>
+                        <nb-option value="SH">Saint Helena, Ascension and Tristan da Cunha</nb-option>
+                        <nb-option value="KN">Saint Kitts and Nevis</nb-option>
+                        <nb-option value="LC">Saint Lucia</nb-option>
+                        <nb-option value="MF">Saint Martin (French part)</nb-option>
+                        <nb-option value="PM">Saint Pierre and Miquelon</nb-option>
+                        <nb-option value="VC">Saint Vincent and the Grenadines</nb-option>
+                        <nb-option value="WS">Samoa</nb-option>
+                        <nb-option value="SM">San Marino</nb-option>
+                        <nb-option value="ST">Sao Tome and Principe</nb-option>
+                        <nb-option value="SA">Saudi Arabia</nb-option>
+                        <nb-option value="SN">Senegal</nb-option>
+                        <nb-option value="RS">Serbia</nb-option>
+                        <nb-option value="SC">Seychelles</nb-option>
+                        <nb-option value="SL">Sierra Leone</nb-option>
+                        <nb-option value="SG">Singapore</nb-option>
+                        <nb-option value="SX">Sint Maarten (Dutch part)</nb-option>
+                        <nb-option value="SK">Slovakia</nb-option>
+                        <nb-option value="SI">Slovenia</nb-option>
+                        <nb-option value="SB">Solomon Islands</nb-option>
+                        <nb-option value="SO">Somalia</nb-option>
+                        <nb-option value="ZA">South Africa</nb-option>
+                        <nb-option value="GS">South Georgia and the South Sandwich Islands</nb-option>
+                        <nb-option value="SS">South Sudan</nb-option>
+                        <nb-option value="ES">Spain</nb-option>
+                        <nb-option value="LK">Sri Lanka</nb-option>
+                        <nb-option value="SD">Sudan</nb-option>
+                        <nb-option value="SR">Suriname</nb-option>
+                        <nb-option value="SJ">Svalbard and Jan Mayen</nb-option>
+                        <nb-option value="SZ">Swaziland</nb-option>
+                        <nb-option value="SE">Sweden</nb-option>
+                        <nb-option value="CH">Switzerland</nb-option>
+                        <nb-option value="SY">Syrian Arab Republic</nb-option>
+                        <nb-option value="TW">Taiwan, Province of China</nb-option>
+                        <nb-option value="TJ">Tajikistan</nb-option>
+                        <nb-option value="TZ">Tanzania, United Republic of</nb-option>
+                        <nb-option value="TH">Thailand</nb-option>
+                        <nb-option value="TL">Timor-Leste</nb-option>
+                        <nb-option value="TG">Togo</nb-option>
+                        <nb-option value="TK">Tokelau</nb-option>
+                        <nb-option value="TO">Tonga</nb-option>
+                        <nb-option value="TT">Trinidad and Tobago</nb-option>
+                        <nb-option value="TN">Tunisia</nb-option>
+                        <nb-option value="TR">Turkey</nb-option>
+                        <nb-option value="TM">Turkmenistan</nb-option>
+                        <nb-option value="TC">Turks and Caicos Islands</nb-option>
+                        <nb-option value="TV">Tuvalu</nb-option>
+                        <nb-option value="UG">Uganda</nb-option>
+                        <nb-option value="UA">Ukraine</nb-option>
+                        <nb-option value="AE">United Arab Emirates</nb-option>
+                        <nb-option value="GB">United Kingdom</nb-option>
+                        <nb-option value="US">United States</nb-option>
+                        <nb-option value="UM">United States Minor Outlying Islands</nb-option>
+                        <nb-option value="UY">Uruguay</nb-option>
+                        <nb-option value="UZ">Uzbekistan</nb-option>
+                        <nb-option value="VU">Vanuatu</nb-option>
+                        <nb-option value="VE">Venezuela, Bolivarian Republic of</nb-option>
+                        <nb-option value="VN">Viet Nam</nb-option>
+                        <nb-option value="VG">Virgin Islands, British</nb-option>
+                        <nb-option value="VI">Virgin Islands, U.S.</nb-option>
+                        <nb-option value="WF">Wallis and Futuna</nb-option>
+                        <nb-option value="EH">Western Sahara</nb-option>
+                        <nb-option value="YE">Yemen</nb-option>
+                        <nb-option value="ZM">Zambia</nb-option>
+                        <nb-option value="ZW">Zimbabwe</nb-option>
+                    </nb-select>
+                </div>
+                <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
+                <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
+            </div>
+
+        </div>
+
+        <div class="register-card-container" *ngIf="step === 3">
+            <div class="login-inputs-container right-part">
+                <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Nombre artistico</p>
+                <div class="input-row">
+                    <input class="register-input" type="text" placeholder="Nombre artistico" name="artistName"
+                        [(ngModel)]="password">
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Genero musical</p>
+                <div class="input-row">
+                    <nb-select class="register-input">
+                        <nb-option value="0" style="font-family: Poppins; font-size: 15px;">Reggaeton</nb-option>
+                        <nb-option value="1" style="font-family: Poppins; font-size: 15px;">Trap</nb-option>
+                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">Pop</nb-option>
+                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">House</nb-option>
+                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">House</nb-option>
+                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">Rap</nb-option>
+                    </nb-select>
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Artista desde
+                </p>
+                <div class="input-row">
+                    <input class="register-input" nbInput placeholder="Selecciona fecha" [nbDatepicker]="formpicker">
+                    <nb-datepicker #formpicker></nb-datepicker>
+                </div>
+
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Bio</p>
+                <div class="input-row">
+                    <textarea class="register-input" type="text" placeholder="Bio" name="name" style="height: 100px;"
+                        [(ngModel)]="bio"></textarea>
+                </div>
+
+                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
+            <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
+
+            </div>
+           
+        </div>
+    </div>
+</div>

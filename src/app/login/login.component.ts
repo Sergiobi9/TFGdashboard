@@ -35,4 +35,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  registerAsArtist(){
+    this.router.navigate(['/auth/register/artist']);
+  }
+
 }
