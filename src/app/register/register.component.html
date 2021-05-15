@@ -1,31 +1,34 @@
 <div class="login-background">
     <div style="display: table;">
-        <h3 style="margin-bottom: 50px; text-align: center;">Registrate como artista</h3>
-        <div style="width: 100%; background: #F9F9F9; border-radius: 20px;" *ngIf="step + 1 !== steps">
+        <h3 style="margin-bottom: 50px; text-align: center;" *ngIf="step + 1 <= steps">Registrate como artista</h3>
+        <div style="width: 100%; background: #F9F9F9; border-radius: 20px;" *ngIf="step + 1 < steps">
             <div style="height: 10px; border-radius: 20px; background: black; transition: 0.5s;"
                 [ngStyle]="{width: width}"></div>
         </div>
-        <p style="text-align: center; margin-top: 25px;" *ngIf="step + 1 !== steps">Step {{step + 1}}/{{steps}}</p>
+        <p style="text-align: center; margin-top: 25px;" *ngIf="step + 1 < steps">Step {{step + 1}}/{{steps}}</p>
         <p style="text-align: center; margin-top: 25px;" *ngIf="step + 1 === steps">Último paso</p>
         <div class="register-card-container" *ngIf="step === 0">
             <div class="login-inputs-container right-part">
                 <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Nombre</p>
                 <div class="input-row">
-                    <input class="register-input" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="email">
+                    <input class="register-input" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="userArtist.firstName">
                 </div>
 
                 <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Apellidos</p>
                 <div class="input-row">
                     <input class="register-input" type="text" placeholder="Apellidos" name="apellidos"
-                        [(ngModel)]="password">
+                    [(ngModel)]="userArtist.lastName">
                 </div>
 
                 <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Email</p>
                 <div class="input-row">
-                    <input class="register-input" type="email" placeholder="Email" name="email" [(ngModel)]="password">
+                    <input class="register-input" type="email" placeholder="Email" name="email" [(ngModel)]="userArtist.email">
                 </div>
 
+                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
+
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
             </div>
         </div>
@@ -35,14 +38,16 @@
                 <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Contraseña</p>
                 <div class="input-row">
                     <input class="register-input" type="password" placeholder="Contraseña" name="password"
-                        [(ngModel)]="password">
+                    [(ngModel)]="userArtist.password">
                 </div>
 
                 <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Repetir contraseña</p>
                 <div class="input-row">
                     <input class="register-input" type="password" placeholder="Repetir contraseña" name="repeatPassword"
-                        [(ngModel)]="password">
+                    [(ngModel)]="passwordConfirm">
                 </div>
+                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
             </div>
@@ -54,22 +59,22 @@
                 <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Fecha de nacimiento
                 </p>
                 <div class="input-row">
-                    <input class="register-input" nbInput placeholder="Selecciona fecha" [nbDatepicker]="formpicker">
-                    <nb-datepicker #formpicker></nb-datepicker>
+                    <input class="register-input" type="text" placeholder="DD/MM/YYYY" name="birthday"
+                    [(ngModel)]="userArtist.birthday">
                 </div>
 
                 <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Genero</p>
                 <div class="input-row">
-                    <nb-select class="register-input">
+                    <nb-select class="register-input" (selectedChange)="onGenderSelected($event)">
                         <nb-option value="0" style="font-family: Poppins; font-size: 15px;">Mujer</nb-option>
                         <nb-option value="1" style="font-family: Poppins; font-size: 15px;">Hombre</nb-option>
                         <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">No binario</nb-option>
                     </nb-select>
                 </div>
 
-                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Pais</p>
+                <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">País</p>
                 <div class="input-row">
-                    <nb-select class="register-input">
+                    <nb-select class="register-input"  (selectedChange)="onCountrySelected($event)">
                         <nb-option value="AF">Afghanistan</nb-option>
                         <nb-option value="AX">Åland Islands</nb-option>
                         <nb-option value="AL">Albania</nb-option>
@@ -321,6 +326,8 @@
                         <nb-option value="ZW">Zimbabwe</nb-option>
                     </nb-select>
                 </div>
+                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
             </div>
@@ -332,33 +339,29 @@
                 <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Nombre artistico</p>
                 <div class="input-row">
                     <input class="register-input" type="text" placeholder="Nombre artistico" name="artistName"
-                        [(ngModel)]="password">
+                        [(ngModel)]="userArtist.artistName">
                 </div>
 
                 <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Genero musical</p>
                 <div class="input-row">
-                    <nb-select class="register-input">
-                        <nb-option value="0" style="font-family: Poppins; font-size: 15px;">Reggaeton</nb-option>
-                        <nb-option value="1" style="font-family: Poppins; font-size: 15px;">Trap</nb-option>
-                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">Pop</nb-option>
-                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">House</nb-option>
-                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">House</nb-option>
-                        <nb-option value="-1" style="font-family: Poppins; font-size: 15px;">Rap</nb-option>
+                    <nb-select class="register-input" (selectedChange)="onMusicStyleSelected($event)">
+                        <nb-option *ngFor="let item of styles" [value]="item.id"> {{ item.name }} </nb-option> 
                     </nb-select>
                 </div>
 
                 <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Artista desde
                 </p>
                 <div class="input-row">
-                    <input class="register-input" nbInput placeholder="Selecciona fecha" [nbDatepicker]="formpicker">
-                    <nb-datepicker #formpicker></nb-datepicker>
+                    <input class="register-input" type="text" placeholder="DD/MM/YYYY" name="since"
+                    [(ngModel)]="userArtist.artistSince">
                 </div>
 
                 <p style="margin-bottom: 5px; text-align: left; font-size: 15px;">Bio</p>
                 <div class="input-row">
                     <textarea class="register-input" type="text" placeholder="Bio" name="name" style="height: 100px;"
-                        [(ngModel)]="bio"></textarea>
+                        [(ngModel)]="userArtist.bio"></textarea>
                 </div>
+                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
@@ -376,9 +379,20 @@
 
                 <label class="register-upload-photo-text" for="choose-photo">Sube una foto</label>
                 <input type="file" id="choose-photo" (change)="fileBrowseHandler($event)" />
+                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
             </div>
         </div>
+
+        <div class="register-card-container" *ngIf="step === 5">
+            <div class="login-inputs-container right-part">
+                <img src="../../assets/images/tfg_app_logo.png" style="width: 25%; margin-bottom: 50px;">
+
+                <h5>Bienvenido a Stereo,<br>{{userArtist.artistName}}</h5>
+                <button class="login-button" style="margin-top: 25px;" (click)="doLogin()">Login</button>
+            </div>
+        </div>
+
     </div>

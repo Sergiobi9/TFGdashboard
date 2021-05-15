@@ -2,14 +2,32 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Session } from "../models/session.model";
+import { MusicStylesService } from "../services/music-styles.service";
 import { StorageService } from "../services/storage.service";
+
+export class UserArtist{
+    firstName: string = "";
+    lastName:string = "";
+    country: string = "";
+    city: string = "";
+    zipCode: string = "";
+    gender: number = -1;
+    birthday: string = "";
+    email: string = "";
+    password: string = "";
+    artistName: string = "";
+    bio: string = "";
+    musicalStyleId: string = "";
+    artistSince: string = "";
+}
 
 @Component({
   selector: "ngx-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
-  providers: [StorageService],
+  providers: [StorageService, MusicStylesService],
 })
+
 export class RegisterComponent implements OnInit {
   faUser = faUser;
   faLock = faLock;
@@ -17,7 +35,11 @@ export class RegisterComponent implements OnInit {
   email = "";
   password = "";
 
-  step = 4;
+  styles: any;
+
+  userArtist: UserArtist = new UserArtist();
+
+  step = 0;
   steps = 5;
   width = ((this.step + 1) / this.steps) * 100 + "%";
   choosePhotoInput: any = null;
@@ -27,8 +49,13 @@ export class RegisterComponent implements OnInit {
   bio = "";
   artistImage: any = "../../assets/images/user.png";
 
-  constructor(private storage: StorageService, private router: Router) {
+  constructor(private storage: StorageService, private router: Router, private musicStyleService: MusicStylesService) {
     console.log(this.width);
+
+    this.musicStyleService.getMusicStyles().pipe().subscribe((data) =>{ 
+      console.log(data)
+      this.styles = data;
+    });
   }
 
   ngOnInit(): void {}
@@ -39,9 +66,93 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  errorAlert = false;
+  errorAlertMessage = "";
+
+  passwordConfirm = "";
+
   proceedStep() {
-    this.step++;
+
+    if (this.step === 0){
+      if (this.userArtist.firstName === ""){
+        this.showErrorAlert("El campo nombre es necesario")
+        return;
+      } else if (this.userArtist.lastName === ""){
+        this.showErrorAlert("El campo apellido es necesario")
+        return;
+      } else if (this.userArtist.email   === ""){
+        this.showErrorAlert("El campo email es necesario")
+        return;
+      }
+
+      this.checkEmailExistsWhenRegisterArtist();
+    } else if (this.step === 1){
+      if (this.userArtist.password.length < 8){
+        this.showErrorAlert("La contraseña debe tener minimo ocho caracteres")
+        return;
+      }
+      else if (this.userArtist.password !== this.passwordConfirm){
+        this.showErrorAlert("Las contraseñas no coinciden")
+        return;
+      } 
+    } else if (this.step === 2){
+      if (this.userArtist.birthday === ""){
+        this.showErrorAlert("El campo fecha de nacimiento es necesario")
+        return;
+      }
+      else if (this.userArtist.country === ""){
+        this.showErrorAlert("El campo país es necesario")
+        return;
+      } 
+    } else if (this.step === 3){
+      if (this.userArtist.artistName === ""){
+        this.showErrorAlert("El campo nombre artistico es necesario")
+        return;
+      }
+      else if (this.userArtist.musicalStyleId === ""){
+        this.showErrorAlert("Selecciona un género musical")
+        return;
+      }
+      else if (this.userArtist.musicalStyleId === ""){
+        this.showErrorAlert("El campo artista desde es necesario")
+        return;
+      }
+      else if (this.userArtist.musicalStyleId === ""){
+        this.showErrorAlert("El campo bio es necesario")
+        return;
+      }  
+    } else if (this.step === 4){
+      if (this.artistImage === "" || this.artistImage === "../../assets/images/user.png"){
+        this.showErrorAlert("Por favor, selecciona una foto")
+        return;
+      }
+
+      this.registerArtist();
+    }
+
+    this.hideErrorAlert();
+    if (this.step !== 4 && this.step !== 0){
+      this.step++;
+    }
     this.width = ((this.step + 1) / this.steps) * 100 + "%";
+
+  }
+
+  checkEmailExistsWhenRegisterArtist(){
+    
+  }
+
+  registerArtist(){
+
+  }
+
+  showErrorAlert(message){
+    this.errorAlert = true;
+    this.errorAlertMessage = message;
+  }
+
+  hideErrorAlert(){
+    this.errorAlert = false;
   }
 
   goBack() {
@@ -82,5 +193,27 @@ export class RegisterComponent implements OnInit {
       that.artistImage = file;
     };
     reader.readAsDataURL(selectedFile);
+  }
+
+  onGenderSelected(value){
+    this.userArtist.gender = Number(value);
+    console.log(this.userArtist);
+  }
+
+  onCountrySelected(value){
+    this.userArtist.country = value;
+    console.log(this.userArtist);
+  }
+
+  selectSince(value){
+    console.log(value);
+  }
+
+  doLogin(){
+
+  }
+
+  onMusicStyleSelected(value){
+    this.userArtist.musicalStyleId = value;
   }
 }

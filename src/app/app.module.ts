@@ -33,6 +33,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';  
 import { RegisterComponent } from './register/register.component';
+import { MusicStylesService } from './services/music-styles.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, RegisterComponent],
@@ -57,7 +58,7 @@ import { RegisterComponent } from './register/register.component';
     ThemeModule.forRoot(),
     FontAwesomeModule
   ],
-  providers: [AuthorizatedGuard, StorageService, AuthenticationService],
+  providers: [AuthorizatedGuard, StorageService, AuthenticationService, MusicStylesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
