@@ -1,11 +1,12 @@
 <div class="login-background">
     <div style="display: table;">
         <h3 style="margin-bottom: 50px; text-align: center;">Registrate como artista</h3>
-        <div style="width: 100%; background: #F9F9F9; border-radius: 20px;">
+        <div style="width: 100%; background: #F9F9F9; border-radius: 20px;" *ngIf="step + 1 !== steps">
             <div style="height: 10px; border-radius: 20px; background: black; transition: 0.5s;"
                 [ngStyle]="{width: width}"></div>
         </div>
-        <p style="text-align: center; margin-top: 25px;">Step {{step + 1}}/{{steps}}</p>
+        <p style="text-align: center; margin-top: 25px;" *ngIf="step + 1 !== steps">Step {{step + 1}}/{{steps}}</p>
+        <p style="text-align: center; margin-top: 25px;" *ngIf="step + 1 === steps">Último paso</p>
         <div class="register-card-container" *ngIf="step === 0">
             <div class="login-inputs-container right-part">
                 <p style="margin-bottom: 5px; margin-top: 50px; text-align: left; font-size: 15px;">Nombre</p>
@@ -359,11 +360,25 @@
                         [(ngModel)]="bio"></textarea>
                 </div>
 
-                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
-            <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
-
+                <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
+                <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
             </div>
-           
+
+        </div>
+
+        <div class="register-card-container" *ngIf="step === 4">
+            <div class="login-inputs-container right-part">
+                <h6 style="margin-top: 30px;">Foto de perfil</h6>
+                <p>Sera visible para los usuarios</p>
+                <div class="register-artist-img-container" style="margin-top: 40px;">
+                    <img [src]="artistImage" for="choose-photo">
+                </div>
+
+                <label class="register-upload-photo-text" for="choose-photo">Sube una foto</label>
+                    <input type="file" id="choose-photo" (change)="fileBrowseHandler($event)" />
+
+                <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
+                <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
+            </div>
         </div>
     </div>
-</div>
