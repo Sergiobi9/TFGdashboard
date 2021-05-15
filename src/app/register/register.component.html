@@ -371,11 +371,11 @@
                 <h6 style="margin-top: 30px;">Foto de perfil</h6>
                 <p>Sera visible para los usuarios</p>
                 <div class="register-artist-img-container" style="margin-top: 40px;">
-                    <img [src]="artistImage" for="choose-photo">
+                    <img src={{artistImage}} for="choose-photo">
                 </div>
 
                 <label class="register-upload-photo-text" for="choose-photo">Sube una foto</label>
-                    <input type="file" id="choose-photo" (change)="fileBrowseHandler($event)" />
+                <input type="file" id="choose-photo" (change)="fileBrowseHandler($event)" />
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>

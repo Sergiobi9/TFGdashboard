@@ -25,8 +25,7 @@ export class RegisterComponent implements OnInit {
   fileMaxSizeAllowed = 1000000;
 
   bio = "";
-  artistImage: any =
-    "https://images.sk-static.com/images/media/profile_images/artists/8508053/huge_avatar";
+  artistImage: any = "../../assets/images/user.png";
 
   constructor(private storage: StorageService, private router: Router) {
     console.log(this.width);
