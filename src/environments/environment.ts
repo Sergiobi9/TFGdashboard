@@ -10,5 +10,6 @@
 
 export const environment = {
   production: false,
-  apiUrl:"http://tfgapi-env.eba-xqpimhpg.us-east-2.elasticbeanstalk.com/",
+  //apiUrl:"http://tfgapi-env.eba-xqpimhpg.us-east-2.elasticbeanstalk.com/",
+  apiUrl:"http://localhost:5000/"
 };

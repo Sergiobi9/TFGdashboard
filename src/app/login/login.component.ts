@@ -26,12 +26,36 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  errorAlert = false;
+  errorAlertMessage = "";
+
+  hideErrorAlert(){
+    this.errorAlert = false
+  }
+
+  showErrorMessage(message){
+    this.errorAlert = true;
+    this.errorAlertMessage = message;
+  }
+
   doLogin(){
+    this.hideErrorAlert();
+
     const loginObject: LoginObject = new LoginObject(this.email, this.password);
-    this.auth.login(loginObject).pipe().subscribe((data: Session) =>{
-      this.storage.setCurrentSession(data);
-      console.log("sucess")
-      this.router.navigate(['/pages/home']);
+    this.auth.login(loginObject).pipe().subscribe((data: any) =>{
+      if (data.info != null && data.info === "user do not exist"){
+        this.showErrorMessage("user do not exist");
+      } else if (data.info != null && data.info ==="user has to register as artist"){
+        this.showErrorMessage("user has to register as artist");
+      } else {
+        this.storage.setCurrentSession(data)
+        this.router.navigate(['/pages/home']);
+      }
+      //
+    }, err =>{
+      if (err.status === 401){
+        this.showErrorMessage("Email or password are not correct");
+      }
     });
   }
 

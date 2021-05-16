@@ -4,6 +4,7 @@ import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Session } from "../models/session.model";
 import { MusicStylesService } from "../services/music-styles.service";
 import { StorageService } from "../services/storage.service";
+import { RegisterService } from "./shared/register.service";
 
 export class UserArtist{
     firstName: string = "";
@@ -25,7 +26,7 @@ export class UserArtist{
   selector: "ngx-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
-  providers: [StorageService, MusicStylesService],
+  providers: [StorageService, MusicStylesService, RegisterService],
 })
 
 export class RegisterComponent implements OnInit {
@@ -49,7 +50,10 @@ export class RegisterComponent implements OnInit {
   bio = "";
   artistImage: any = "../../assets/images/user.png";
 
-  constructor(private storage: StorageService, private router: Router, private musicStyleService: MusicStylesService) {
+  constructor(private storage: StorageService, 
+    private router: Router, 
+    private musicStyleService: MusicStylesService,
+    private register: RegisterService) {
     console.log(this.width);
 
     this.musicStyleService.getMusicStyles().pipe().subscribe((data) =>{ 
@@ -61,9 +65,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   uploadImage() {
-    if (this.choosePhotoInput !== null) {
-      this.choosePhotoInput.click();
-    }
+    this.step++;
   }
 
   errorAlert = false;
@@ -85,7 +87,6 @@ export class RegisterComponent implements OnInit {
         return;
       }
 
-      this.checkEmailExistsWhenRegisterArtist();
     } else if (this.step === 1){
       if (this.userArtist.password.length < 8){
         this.showErrorAlert("La contraseña debe tener minimo ocho caracteres")
@@ -133,17 +134,22 @@ export class RegisterComponent implements OnInit {
     this.hideErrorAlert();
     if (this.step !== 4 && this.step !== 0){
       this.step++;
+    } else if (this.step === 0){
+      this.checkEmailExistsWhenRegisterArtist();
     }
     this.width = ((this.step + 1) / this.steps) * 100 + "%";
 
   }
 
   checkEmailExistsWhenRegisterArtist(){
-    
+    this.step++;
   }
 
   registerArtist(){
-
+    this.register.registerArtist(this.userArtist).pipe().subscribe((data:Session) =>{
+      this.storage.setCurrentSession(data);
+      this.uploadImage();
+    });
   }
 
   showErrorAlert(message){
@@ -210,7 +216,7 @@ export class RegisterComponent implements OnInit {
   }
 
   doLogin(){
-
+    this.router.navigate(["/pages/home"]);
   }
 
   onMusicStyleSelected(value){

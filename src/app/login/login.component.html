@@ -17,6 +17,7 @@
                 <input class="login-input" type="password" placeholder="Contraseña" name="password" [(ngModel)]="password">
             </div>
 
+            <p style="margin:0px; text-align: center; color: #df083e; font-size: 12px;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
             <button class="login-button" style="margin-top: 25px;" (click)="doLogin()">Iniciar sesión</button>
 
             <p class="login-create-account" (click)="registerAsArtist()">Registrarse como <b>artista</b></p>

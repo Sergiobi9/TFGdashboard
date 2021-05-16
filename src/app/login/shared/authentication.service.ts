@@ -14,7 +14,7 @@ export class AuthenticationService {
     var headers = new HttpHeaders();
     headers.append("Content-type", "application/json");
 
-    return this.http.post(environment.apiUrl + "auth/login", loginObj, {
+    return this.http.post(environment.apiUrl + "auth/dashboard/login", loginObj, {
       headers,
     });
   }
