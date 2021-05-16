@@ -75,6 +75,7 @@ export class RegisterComponent implements OnInit {
 
   proceedStep() {
 
+    this.hideErrorAlert();
     if (this.step === 0){
       if (this.userArtist.firstName === ""){
         this.showErrorAlert("El campo nombre es necesario")
@@ -131,7 +132,6 @@ export class RegisterComponent implements OnInit {
       this.registerArtist();
     }
 
-    this.hideErrorAlert();
     if (this.step !== 4 && this.step !== 0){
       this.step++;
     } else if (this.step === 0){
@@ -142,7 +142,13 @@ export class RegisterComponent implements OnInit {
   }
 
   checkEmailExistsWhenRegisterArtist(){
-    this.step++;
+    this.register.checkIfArtistExist(this.userArtist.email).pipe().subscribe((data: any) => {
+      if (data.info === "ARTIST ALREADY EXISTS"){
+        this.showErrorAlert("There is already an artist with this email")
+      } else {
+        this.step++;
+      }
+    });
   }
 
   registerArtist(){

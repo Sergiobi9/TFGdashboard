@@ -18,4 +18,13 @@ export class RegisterService {
       headers,
     });
   }
+
+  checkIfArtistExist(email: string,) {
+    var headers = new HttpHeaders();
+    headers.append("Content-type", "application/json");
+
+    return this.http.get(environment.apiUrl + `user/artist/existing/${email}`, {
+      headers,
+    });
+  }
 }

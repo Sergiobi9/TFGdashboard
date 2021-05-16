@@ -25,7 +25,7 @@
                     <input class="register-input" type="email" placeholder="Email" name="email" [(ngModel)]="userArtist.email">
                 </div>
 
-                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+                <p style="margin:0px; text-align: center; color: #df083e; font-size: 14px;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
 
@@ -46,7 +46,7 @@
                     <input class="register-input" type="password" placeholder="Repetir contraseña" name="repeatPassword"
                     [(ngModel)]="passwordConfirm">
                 </div>
-                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+                <p style="margin:0px; text-align: center; color: #df083e; font-size: 14px;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
@@ -326,7 +326,7 @@
                         <nb-option value="ZW">Zimbabwe</nb-option>
                     </nb-select>
                 </div>
-                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+                <p style="margin:0px; text-align: center; color: #df083e; font-size: 14px;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
@@ -361,7 +361,7 @@
                     <textarea class="register-input" type="text" placeholder="Bio" name="name" style="height: 100px;"
                         [(ngModel)]="userArtist.bio"></textarea>
                 </div>
-                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+                <p style="margin:0px; text-align: center; color: #df083e; font-size: 14px;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
@@ -379,7 +379,7 @@
 
                 <label class="register-upload-photo-text" for="choose-photo">Sube una foto</label>
                 <input type="file" id="choose-photo" (change)="fileBrowseHandler($event)" />
-                <p style="margin:0px; text-align: center; color: #df083e;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
+                <p style="margin:0px; text-align: center; color: #df083e; font-size: 14px;" *ngIf="errorAlert">{{errorAlertMessage}}</p>
 
                 <button class="login-button" style="margin-top: 25px;" (click)="proceedStep()">Siguiente</button>
                 <p style="margin-top: 20px; cursor: pointer;" (click)="goBack()">Atrás</p>
