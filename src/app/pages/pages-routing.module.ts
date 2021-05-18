@@ -8,6 +8,7 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { AuthorizatedGuard } from '../guards/authorized.guard';
 import { ConcertsComponent } from './concerts/concerts.component';
 import { NewConcertComponent } from './new-concert/new-concert.component';
+import { LegalComponent } from './legal/legal.component';
 
 const routes: Routes = [{
   path: '',
@@ -24,6 +25,10 @@ const routes: Routes = [{
     {
       path: 'new/concert',
       component: NewConcertComponent,
+    },
+    {
+      path: 'legal',
+      component: LegalComponent,
     },
     {
       path: 'layout',

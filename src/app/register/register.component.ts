@@ -5,6 +5,7 @@ import { Session } from "../models/session.model";
 import { MusicStylesService } from "../services/music-styles.service";
 import { StorageService } from "../services/storage.service";
 import { RegisterService } from "./shared/register.service";
+import { AwsProfileImageService } from "./shared/upload-profile-image.service";
 
 export class UserArtist{
     firstName: string = "";
@@ -26,7 +27,7 @@ export class UserArtist{
   selector: "ngx-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
-  providers: [StorageService, MusicStylesService, RegisterService],
+  providers: [StorageService, MusicStylesService, RegisterService, AwsProfileImageService],
 })
 
 export class RegisterComponent implements OnInit {
@@ -53,7 +54,8 @@ export class RegisterComponent implements OnInit {
   constructor(private storage: StorageService, 
     private router: Router, 
     private musicStyleService: MusicStylesService,
-    private register: RegisterService) {
+    private register: RegisterService,
+    private awsProfileImageService: AwsProfileImageService) {
     console.log(this.width);
 
     this.musicStyleService.getMusicStyles().pipe().subscribe((data) =>{ 
@@ -64,7 +66,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  uploadImage() {
+  uploadImage(id) {
+    this.awsProfileImageService.uploadConcertImagesToS3(this.artistImage, id, this)
+  }
+
+  uploadSuccess(){
     this.step++;
   }
 
@@ -154,7 +160,7 @@ export class RegisterComponent implements OnInit {
   registerArtist(){
     this.register.registerArtist(this.userArtist).pipe().subscribe((data:Session) =>{
       this.storage.setCurrentSession(data);
-      this.uploadImage();
+      this.uploadImage(data.user.id);
     });
   }
 
