@@ -91,3 +91,10 @@
   color: #2FEC9A;
 }
 
+::ng-deep .user-picture.image.ng-star-inserted{
+  background-position: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}

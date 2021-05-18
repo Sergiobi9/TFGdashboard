@@ -86,16 +86,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.storage.logout();
         }
       });
-    
     }
+
+    userId = JSON.parse(localStorage.getItem('currentUser')).user.id;
+    artistImageUrl = "";
 
     ngOnInit() {
         this.currentTheme = this.themeService.currentTheme;
 
-        this.userService
-            .getUsers()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((users: any) => (this.user = users.nick));
+        this.artistImageUrl = "https://artists-tfg.s3.us-east-2.amazonaws.com/" + this.userId + ".png";
+
 
         const {xl} = this.breakpointService.getBreakpointsMap();
         this.themeService

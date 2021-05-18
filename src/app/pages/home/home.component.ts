@@ -18,10 +18,13 @@ interface CardSettings {
 export class HomeComponent implements OnDestroy {
 
   private alive = true;
-  imageUrl ="https://artists-tfg.s3.us-east-2.amazonaws.com/604fa1abbf44d3131608e744.png";
+  userId = JSON.parse(localStorage.getItem('currentUser')).user.id;
+
+  imageUrl;
 
   constructor(private router: Router) {
-
+    console.log(this.userId);
+    this.imageUrl = "https://artists-tfg.s3.us-east-2.amazonaws.com/" + this.userId + ".png";
   }
 
   ngOnDestroy() {
