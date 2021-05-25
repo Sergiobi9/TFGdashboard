@@ -6,26 +6,24 @@
     <div style="margin: 25px">
         <h4>Descripción y fecha</h4>
         <div style="display: flex; width: 100%;">
-            <div style="display: block; width: 50%;">
+            <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
                 <p style="margin-top: 35px;">Nombre del concierto</p>
                 <input class="row-input" type="text" placeholder="Nombre del concierto" name="name" [(ngModel)]="name">
             </div>
-            <div style="display: block; width: 50%;">
+            <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
                 <p style="margin-top: 35px;">Fecha</p>
-                <div class="register-birthday-input-container">
-                    <input class="birthday-input" nbInput placeholder="DD/MM/YYYY">
-                </div>
+                <input class="row-input" nbInput placeholder="DD/MM/YYYY">
             </div>
 
         </div>
 
         <div style="display: flex; width: 100%;">
-            <div style="display: block; width: 50%;">
+            <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
                 <p style="margin-top: 35px;">Descripción</p>
                 <textarea class="row-input" type="text" placeholder="Descripción de presentación" name="name"
                     style="height: 100px;" [(ngModel)]="name"></textarea>
             </div>
-            <div style="display: block;  width: 50%;">
+            <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
                 <p style="margin-top: 35px;">Descripción extra</p>
                 <textarea class="row-input" type="text" placeholder="Descripción de presentación extra" name="name"
                     style="height: 100px;" [(ngModel)]="name"></textarea>
@@ -71,11 +69,11 @@
 
         <h4 style="margin-top: 50px; margin-bottom: 25px;">Entradas</h4>
         <div style="display: flex; width: 100%;">
-            <div style="display: block; width: 50%;">
+            <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
                 <p style="margin-top: 35px;">Numero de entradas</p>
                 <input class="row-input" type="number" placeholder="Numero de entradas" name="name" [(ngModel)]="name">
             </div>
-            <div style="display: block; width: 50%;">
+            <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
                 <p style="margin-top: 35px;">Precio</p>
                 <input class="row-input" type="number" placeholder="Precio" name="name" [(ngModel)]="name">
             </div>
@@ -83,7 +81,7 @@
         <h4 style="margin-top: 25px; margin-bottom: 20px;">Artistas que participaran</h4>
 
         <input class="row-input" type="text" placeholder="Buscar artista" name="artist" [(ngModel)]="artistSearchTerm"
-            (ngModelChange)="onArtistParticipatingInputChange($event)">
+            (ngModelChange)="onArtistParticipatingInputChange($event)" style="width: 100%;">
         <div class="row" style="justify-content: center;">
             <div class="column"
                 style="border-radius: 20px; margin: 0px 20px 10px 20px; display: contents; text-align: center; max-width: 250px;">
