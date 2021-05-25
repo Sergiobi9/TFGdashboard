@@ -4,10 +4,11 @@
     <p>Organiza tu proximo concierto en pocos pasos</p>
     <button class="login-button" (click)="createConcert()">Nuevo concierto</button>
   </div>
-  
+
   <h3 style="margin-top: 75px; margin-bottom: 50px;">Proximo concierto</h3>
-  
-  <div *ngIf="nextConcert != null && nextConcert.concertId != null" class="column" style="border-radius: 20px; margin: 0px 20px 10px 20px; max-width: 500px; margin: 25px auto;">
+
+  <div *ngIf="nextConcert != null && nextConcert.concertId != null" class="column"
+    style="border-radius: 20px; margin: 0px 20px 10px 20px; max-width: 500px; margin: 25px auto;  cursor: pointer;">
     <div class="solo-card" style="position: relative; border-radius: 10px; display: flex;">
       <img src={{nextConcert.concertCoverImage}}
         style="position: absolute; width: -webkit-fill-available; height:  -webkit-fill-available; border-radius: 10px;">
@@ -20,7 +21,8 @@
           {{nextConcert.placeName}}</p>
       </div>
       <div style="display: block; width: 30%;">
-        <h6 style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
+        <h6
+          style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
           {{nextConcert.dateStarts | dateConcertPipe}}</h6>
         <p style="position: relative; text-align: right; padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
           {{nextConcert.dateStarts | yearConcertPipe}}</p>
@@ -28,90 +30,115 @@
     </div>
   </div>
 
-  <div *ngIf="nextConcert == null || nextConcert.concertId == null" >
+  <div *ngIf="nextConcert == null || nextConcert.concertId == null">
     <p style="text-align: center;">No tienes ningun próximo concierto</p>
   </div>
 
 
   <h3 style="margin-top: 50px; margin-bottom: 50px;">Conciertos creados por tí</h3>
-  
+
   <div class="row" style="justify-content: center;">
-    <div *ngFor="let concert of createdConcerts" class="column" style="border-radius: 20px; margin: 0px 20px 10px 20px;">
+    <div *ngFor="let concert of createdConcerts" class="column"
+      style="border-radius: 20px; margin: 0px 20px 10px 20px; cursor: pointer;">
       <div class="card" style="position: relative; border-radius: 10px;">
         <img src={{concert.concertCoverImage}}
           style="position: absolute; width: -webkit-fill-available; height:  -webkit-fill-available; border-radius: 10px;">
       </div>
       <div style="display: flex; width: 100%; align-items: center; margin-top: 10px;">
         <div style="display: block; width: 70%;">
-          <h3 style="position: relative; padding: 0px 10px 5px 15px; text-align: left; color: black; margin-bottom: 0px;">
+          <h3
+            style="position: relative; padding: 0px 10px 5px 15px; text-align: left; color: black; margin-bottom: 0px;">
             {{concert.name}}</h3>
-          <p style="position: relative; text-align: left;  padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
+          <p
+            style="position: relative; text-align: left;  padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
             {{concert.placeName}}</p>
         </div>
         <div style="display: block; width: 30%;">
-          <h6 style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
+          <h6
+            style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
             {{concert.dateStarts | dateConcertPipe}}</h6>
-          <p style="position: relative; text-align: right; padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
+          <p
+            style="position: relative; text-align: right; padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
             {{concert.dateStarts | yearConcertPipe}}</p>
         </div>
       </div>
-  
-  
+
+
     </div>
   </div>
-  
+
+  <div *ngIf="createdConcerts == null || createdConcerts.length == 0">
+    <p style="text-align: center;">No tienes ningun concierto creado por tí</p>
+  </div>
+
   <h3 style="margin-top: 50px; margin-bottom: 50px;">Conciertos en los que colaboras</h3>
-  
+
   <div class="row" style="justify-content: center;">
-    <div *ngFor="let concert of featuringConcerts" class="column" style="border-radius: 20px; margin: 0px 20px 10px 20px;">
+    <div *ngFor="let concert of featuringConcerts" class="column"
+      style="border-radius: 20px; margin: 0px 20px 10px 20px;  cursor: pointer;">
       <div class="card" style="position: relative; border-radius: 10px;">
         <img src={{concert.concertCoverImage}}
           style="position: absolute; width: -webkit-fill-available; height:  -webkit-fill-available; border-radius: 10px;">
       </div>
       <div style="display: flex; width: 100%; align-items: center; margin-top: 10px;">
         <div style="display: block; width: 70%;">
-          <h3 style="position: relative; padding: 0px 10px 5px 15px; text-align: left; color: black; margin-bottom: 0px;">
+          <h3
+            style="position: relative; padding: 0px 10px 5px 15px; text-align: left; color: black; margin-bottom: 0px;">
             {{concert.name}}</h3>
-          <p style="position: relative; text-align: left;  padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
+          <p
+            style="position: relative; text-align: left;  padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
             {{concert.placeName}}</p>
         </div>
         <div style="display: block; width: 30%;">
-          <h6 style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
+          <h6
+            style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
             {{concert.dateStarts | dateConcertPipe}}</h6>
-          <p style="position: relative; text-align: right; padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
+          <p
+            style="position: relative; text-align: right; padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
             {{concert.dateStarts | yearConcertPipe}}</p>
         </div>
       </div>
-  
-  
     </div>
   </div>
-  
+
+  <div *ngIf="featuringConcerts == null || featuringConcerts.length == 0">
+    <p style="text-align: center;">Todavía no participas en ningún concierto como invitado</p>
+  </div>
+
   <h3 style="margin-top: 50px; margin-bottom: 50px;">Conciertos finalizados</h3>
-  
+
   <div class="row" style="justify-content: center;">
-    <div *ngFor="let concert of finishedConcerts" class="column" style="border-radius: 20px; margin: 0px 20px 10px 20px;">
+    <div *ngFor="let concert of finishedConcerts" class="column"
+      style="border-radius: 20px; margin: 0px 20px 10px 20px; cursor: pointer;">
       <div class="card" style="position: relative; border-radius: 10px;">
         <img src={{concert.concertCoverImage}}
           style="position: absolute; width: -webkit-fill-available; height:  -webkit-fill-available; border-radius: 10px;">
       </div>
       <div style="display: flex; width: 100%; align-items: center; margin-top: 10px;">
         <div style="display: block; width: 70%;">
-          <h3 style="position: relative; padding: 0px 10px 5px 15px; text-align: left; color: black; margin-bottom: 0px;">
+          <h3
+            style="position: relative; padding: 0px 10px 5px 15px; text-align: left; color: black; margin-bottom: 0px;">
             {{concert.name}}</h3>
-          <p style="position: relative; text-align: left;  padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
+          <p
+            style="position: relative; text-align: left;  padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
             {{concert.placeName}}</p>
         </div>
         <div style="display: block; width: 30%;">
-          <h6 style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
+          <h6
+            style="position: relative; padding: 0px 10px 5px 15px; text-align: right; color: black; margin-bottom: 0px;">
             {{concert.dateStarts | dateConcertPipe}}</h6>
-          <p style="position: relative; text-align: right; padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
+          <p
+            style="position: relative; text-align: right; padding: 0px 10px 10px 15px; color: black; font-weight: 500;">
             {{concert.dateStarts | yearConcertPipe}}</p>
         </div>
       </div>
-  
-  
+
+
     </div>
   </div>
-  
+
+  <div *ngIf="featuringConcerts == null || featuringConcerts.length == 0">
+    <p style="text-align: center;">Todavía no has finalizado ningun concierto</p>
+  </div>
+
 </div>
