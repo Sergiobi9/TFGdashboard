@@ -44,13 +44,29 @@
         </div>
 
         <h4 style="margin-top: 50px; margin-bottom: 25px;">Imagenes de la ubicación</h4>
-        <p>Puedes subir imagenes de la ubicación para que los usuarios puedan ver el lugar que se va a dar a cabo el
+        <p>Puedes subir hasta cuatro imagenes de la ubicación para que los usuarios puedan ver el lugar que se va a dar
+            a cabo el
             concierto (opcional)</p>
-        <div
+        <div *ngIf="images.length == 0"
             style="width: 60%; height: 200px; border-radius: 20px; border: dotted 1px #828282; display: flex; text-align: center; margin: 35px auto 35px auto; justify-content: center; align-items: center; ">
-            <fa-icon [icon]="faCloudUploadAlt" style="font-size: 45px; color: #828282;"></fa-icon>
+            <fa-icon [icon]="faCloudUploadAlt" style="font-size: 40px; color: #828282; margin-right: 20px;"></fa-icon>
             <label class="register-upload-photo-text" for="choose-photo">Sube imagenes</label>
-                <input type="file" id="choose-photo" (change)="fileBrowseHandler($event)" />
+            <input type="file" id="choose-photo" multiple (change)="fileBrowseHandler($event)" />
+        </div>
+
+        <div *ngIf="images.length != 0">
+            <div class="row" style="justify-content: center;">
+                <div class="column" style="border-radius: 20px; margin: 0px 20px 10px 20px;">
+                    <img *ngFor="let image of images" [src]="image"
+                        style="width:200px; height: 150px; border-radius:20px; object-fit:cover; margin: 20px;">
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <label class="register-upload-photo-text" for="choose-photo">Sube más imagenes</label>
+                <input type="file" id="choose-photo" multiple (change)="fileBrowseHandler($event)" />
+            </div>
+
         </div>
 
         <h4 style="margin-top: 50px; margin-bottom: 25px;">Entradas</h4>
@@ -66,6 +82,27 @@
         </div>
         <h4 style="margin-top: 25px; margin-bottom: 20px;">Artistas que participaran</h4>
 
+        <input class="row-input" type="text" placeholder="Buscar artista" name="artist" [(ngModel)]="artistSearchTerm"
+            (ngModelChange)="onArtistParticipatingInputChange($event)">
+        <div class="row" style="justify-content: center;">
+            <div class="column"
+                style="border-radius: 20px; margin: 0px 20px 10px 20px; display: contents; text-align: center; max-width: 250px;">
+                <div *ngFor="let artist of artists" style="margin: 20px;">
+                    <div style="position: relative; cursor: pointer;" (click)="selectArtist(artist)">
+                        <img [src]="artist.profileUrl" [ngStyle]="{'opacity': artist.opacity}"
+                            style="width:100px; height: 100px; border-radius:50%; object-fit:cover; transition: 0.5s;">
+                        <p [ngStyle]="{'font-weight': artist.opacity === 1? 500: 1000}"
+                            style="transition: 0.5s; margin-top: 10px;">{{artist.artistName}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
+    <div style="text-align: center;">
+        <button class="login-button" (click)="createConcert()">Crear concierto</button>
+    </div>
+
 
 </div>

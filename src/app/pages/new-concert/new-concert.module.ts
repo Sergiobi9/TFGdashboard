@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AgmCoreModule } from '@agm/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AwsFileUploaderService } from './shared/aws-file-uploader.service';
+import { ArtistService } from './shared/artist.service';
 
 @NgModule({
   imports: [
@@ -52,6 +53,6 @@ import { AwsFileUploaderService } from './shared/aws-file-uploader.service';
   declarations: [
     NewConcertComponent,
   ],
-  providers:[AwsFileUploaderService]
+  providers:[AwsFileUploaderService, ArtistService]
 })
 export class NewConcertModule { }

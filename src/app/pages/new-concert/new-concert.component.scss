@@ -41,6 +41,10 @@ textarea{
   width: 85%;
 }
 
+input[type="file"] {
+  display: none;
+}
+
 ::ng-deep .agm-map-container-inner {
   border-radius: 10px;
 }
