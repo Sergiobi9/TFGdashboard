@@ -13,23 +13,12 @@ import {
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { StatusCardComponent } from './status-card/status-card.component';
-import { ContactsComponent } from './contacts/contacts.component';
-import { RoomsComponent } from './rooms/rooms.component';
-import { RoomSelectorComponent } from './rooms/room-selector/room-selector.component';
-import { TemperatureComponent } from './temperature/temperature.component';
-import { TemperatureDraggerComponent } from './temperature/temperature-dragger/temperature-dragger.component';
-import { KittenComponent } from './kitten/kitten.component';
-import { ElectricityComponent } from './electricity/electricity.component';
-import { ElectricityChartComponent } from './electricity/electricity-chart/electricity-chart.component';
-import { WeatherComponent } from './weather/weather.component';
-import { SolarComponent } from './solar/solar.component';
-import { PlayerComponent } from './rooms/player/player.component';
-import { TrafficComponent } from './traffic/traffic.component';
-import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { FormsModule } from '@angular/forms';
 import { ConcertsComponent } from './concerts.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { ConcertsService } from './shared/concerts.service';
+import { YearConcertPipe } from './pipe/year-concert.pipe';
+import { DayConcertPipe } from './pipe/date-concert.pipe';
 
 @NgModule({
   imports: [
@@ -38,6 +27,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     NbCardModule,
     NbUserModule,
     NbButtonModule,
+    FormsModule,
     NbTabsetModule,
     NbActionsModule,
     NbRadioModule,
@@ -50,20 +40,9 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
   ],
   declarations: [
     ConcertsComponent,
-    StatusCardComponent,
-    TemperatureDraggerComponent,
-    ContactsComponent,
-    RoomSelectorComponent,
-    TemperatureComponent,
-    RoomsComponent,
-    KittenComponent,
-    ElectricityComponent,
-    ElectricityChartComponent,
-    WeatherComponent,
-    PlayerComponent,
-    SolarComponent,
-    TrafficComponent,
-    TrafficChartComponent,
+    YearConcertPipe,
+    DayConcertPipe
   ],
+  providers:[ConcertsService]
 })
 export class ConcertsModule { }
