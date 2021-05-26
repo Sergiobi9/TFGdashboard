@@ -19,6 +19,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { ConcertsService } from './shared/concerts.service';
 import { YearConcertPipe } from './pipe/year-concert.pipe';
 import { DayConcertPipe } from './pipe/date-concert.pipe';
+import { ManageConcert } from './dialog/manage-concert.component';
 
 @NgModule({
   imports: [
@@ -41,8 +42,10 @@ import { DayConcertPipe } from './pipe/date-concert.pipe';
   declarations: [
     ConcertsComponent,
     YearConcertPipe,
-    DayConcertPipe
+    DayConcertPipe,
+    ManageConcert
   ],
+  entryComponents:[ManageConcert],
   providers:[ConcertsService]
 })
 export class ConcertsModule { }
