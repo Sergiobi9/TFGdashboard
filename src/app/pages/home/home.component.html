@@ -75,4 +75,11 @@
 
 <div class="col-md-12">
   <h1>De donde son tus fans</h1>
+
+  <div *ngIf="!mapWithDataActive" style="margin-top: 50px;">
+    <div echarts [options]="optionsMap" class="echarts" height="450px"></div>
+  </div>
+  <div *ngIf="mapWithDataActive" style="text-align: center;align-content: center;margin-top: 50px;">
+    <div echarts [options]="options66" class="echarts" height="450px"></div>
+  </div>
 </div>
