@@ -84,6 +84,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       menu.onItemClick().subscribe((data) => {
         if (data.item.title == "Log out"){
           this.storage.logout();
+        } else if (data.item.title == "Profile"){
+            this.router.navigate(["/pages/profile"]);
         }
       });
     }

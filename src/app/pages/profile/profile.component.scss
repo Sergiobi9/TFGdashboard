@@ -1,0 +1,87 @@
+@import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .solar-card nb-card-header {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    ngx-traffic {
+      display: none;
+    }
+  }
+}
+
+textarea{
+  resize: none;
+}
+
+.row-input {
+  padding: 15px 20px 15px 25px;
+  border: none;
+  width: 100%;
+  margin: 5px 0px 25px 0px;
+  border-radius: 20px;
+  background: #e6e6e6;
+  color: #666666;
+  font-family: "Poppins";
+  font-size: 15px;
+}
+
+.register-birthday-input-container input {
+  font-size: 15px;
+  color: #666666;
+  padding: 15px 20px 15px 25px;
+  font-family: "Poppins";
+  border: none;
+  background: transparent;
+  width: 85%;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+::ng-deep .agm-map-container-inner {
+  border-radius: 10px;
+}
+
+
+::ng-deep mat-datepicker-toggle button {
+  background: transparent;
+}
+
+.register-birthday-input-container {
+  border: none;
+  width: 85%;
+  margin: 5px 0px 25px 0px;
+  border-radius: 20px;
+  background: #e6e6e6;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  min-width: 350px;
+  min-height: 200px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.login-button {
+  padding: 17px 20px;
+  text-align: center;
+  width: fit-content;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  background: #141e30;
+  transition: 0.5s;
+  width: 20%;
+  min-width: 200px;
+  font-family: "Poppins";
+  font-size: 14px;
+  cursor: pointer;
+}
