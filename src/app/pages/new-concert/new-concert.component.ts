@@ -12,7 +12,7 @@ import { AwsFileUploaderService } from "./shared/aws-file-uploader.service";
 import { ArtistService } from "./shared/artist.service";
 
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { ConcertRegister } from "../../services/concert.service";
+import { ConcertRegister, ConcertsService } from "../../services/concert.service";
 import { DateUtilsHelper } from "../../../utils/date-utils";
 interface CardSettings {
   title: string;
@@ -24,7 +24,7 @@ interface CardSettings {
   selector: "ngx-new-concert",
   styleUrls: ["./new-concert.component.scss"],
   templateUrl: "./new-concert.component.html",
-  providers: [AwsFileUploaderService, ArtistService],
+  providers: [AwsFileUploaderService, ArtistService, ConcertsService],
 })
 export class NewConcertComponent implements OnDestroy, OnInit {
   name = "";
@@ -32,6 +32,8 @@ export class NewConcertComponent implements OnDestroy, OnInit {
   longitude = -99.653015;
   address = "";
   zoom = 9;
+
+  hora;
 
   locationGranted = true;
 
@@ -59,7 +61,8 @@ export class NewConcertComponent implements OnDestroy, OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private awsFileUploaderService: AwsFileUploaderService,
-    private artistService: ArtistService
+    private artistService: ArtistService,
+    private concertService: ConcertsService
   ) {
     this.artistService
       .getArtists()
@@ -301,8 +304,8 @@ export class NewConcertComponent implements OnDestroy, OnInit {
 
   ngOnDestroy() {}
 
-  errorAlert = true;
-  errorMessage = "Hello";
+  errorAlert = false;
+  errorMessage = "";
 
   hideErrorMessage() {
     this.errorAlert = false;
@@ -311,7 +314,10 @@ export class NewConcertComponent implements OnDestroy, OnInit {
   showErrorMessage(message) {
     this.errorAlert = true;
     this.errorMessage = message;
+    this.successAlert = false;
   }
+
+  block = false;
 
   imageUrl =
     "https://concerts-images-tfg.s3.us-east-2.amazonaws.com/605bc026b2d5497a8393bf0b_0.png";
@@ -330,9 +336,63 @@ export class NewConcertComponent implements OnDestroy, OnInit {
       }
     }
 
+    this.concert.numberImages = this.images.length;
     this.concert.artistsIds = artistsIds;
 
-    console.log(this.concert)
+    var dateStarts = this.concert.dateStarts;
+    this.concert.dateStarts = this.concert.dateStarts + " " + this.hora + ":00.000+0100";
+    this.concert.dateCreated = DateUtilsHelper.timeStamp();
+
+    this.showSuccessMessage("Creando concierto, por favor espera")
+
+    if (!this.block){
+      this.block = true;
+      this.concertService.registerConcert(this.concert).pipe().subscribe((data:any)=>{
+        this.concert.dateStarts = dateStarts;
+        var concertId = data.id;
+        this.showSuccessMessage("Concierto creado. Por favor espera, se esta subiendo la imagen cover.")
+        this.awsFileUploaderService.uploadConcertImageToS3(this.imagesCover, concertId, this)
+      }, err =>{
+        this.block = false;
+        this.concert.dateStarts = dateStarts;
+        this.showErrorMessage("Vaya algo ha ido mal creando el concierto, prueba de nuevo más tarde")
+      });
+    }
+  }
+
+  uploadConcertPlaceImages(id){
+    if (this.images != null && this.images.length == 0){
+      this.successRegister();
+    } else {
+      this.showSuccessMessage("Por favor espera, se estan subiendo las imagenes del sitio del concierto")
+      for (let i = 0; i < this.images.length; i++){
+        var file = this.images[i];
+  
+        var isLastItem = i == this.images.length-1;
+        this.awsFileUploaderService.uploadConcertPlaceImagesToS3(file, id, i, isLastItem, this)
+      }  
+    }
+  }
+
+  successAlert = false;
+  successMessage = "";
+
+  hideSuccessMessage() {
+    this.successAlert = false;
+  }
+
+  showSuccessMessage(message) {
+    this.successAlert = true;
+    this.successMessage = message;
+    this.errorAlert = false;
+  }
+
+
+  successRegister(){
+    this.showErrorMessage("Concierto registrado correctamente. Redirigiendote a conciertos ..")
+    setTimeout(() => {
+      this.router.navigate(["/pages/concerts"]);
+    }, 1000);
   }
 
   checkInputs() {
@@ -345,7 +405,15 @@ export class NewConcertComponent implements OnDestroy, OnInit {
       return true;
     } else if (!DateUtilsHelper.checkDateFormat(this.concert.dateStarts)) {
       this.showErrorMessage(
-        "Por favor, pon una fecha valida con formato DD/MM/YYYY tu concierto"
+        "Por favor, pon una fecha valida con formato DD-MM-YYY tu concierto"
+      );
+      return true;
+    } else if (this.hora === "" ) {
+      this.showErrorMessage("Por favor, pon una hora de inicio a tu concierto");
+      return true;
+    } else if (!DateUtilsHelper.checkHourFormat(this.hora)) {
+      this.showErrorMessage(
+        "Por favor, pon una hora de inicio valida con formato HH:MM a tu concierto"
       );
       return true;
     } else if (

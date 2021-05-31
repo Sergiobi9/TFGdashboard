@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { min } from 'rxjs/operators';
 
 export class DateUtilsHelper {
 
@@ -16,16 +17,28 @@ export class DateUtilsHelper {
   }
 
   static checkDateFormat(date:string){
-    if (date.includes('/')){
-      var splitedDate = date.split('/');
+    if (date != null && date.includes('-')){
+      var splitedDate = date.split('-');
       console.log(splitedDate)
 
       var year = splitedDate[2]
       var month = splitedDate[1];
       var day = splitedDate[0];
 
-      return moment(day +"/"+ month +"/"+ year, 'DD/MM/YYYY',true).isValid();
+      return moment(day +"-"+ month +"-"+ year, 'DD-MM-YYYY',true).isValid();
 
+    } else return false;
+  }
+
+  static checkHourFormat(hour: string){
+    if (hour != null &&hour.includes(':')){
+      var splitedDate = hour.split(':');
+      console.log(splitedDate)
+
+      var hour = splitedDate[0]
+      var minutes = splitedDate[1];
+
+      return Number(hour) < 24 && Number(hour) >= 0 && Number(minutes) < 60 && Number(minutes) >= 0
     } else return false;
   }
 }

@@ -12,9 +12,14 @@
                     <input class="row-input" type="text" placeholder="Nombre del concierto" name="name"
                         [(ngModel)]="concert.name">
                 </div>
-                <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
+                <div style="display: block; width: 25%; padding: 15px 0px 15px 15px;">
                     <p style="margin-top: 35px;">Fecha</p>
-                    <input class="row-input" nbInput placeholder="DD/MM/YYYY" [(ngModel)]="concert.dateStarts">
+                    <input class="row-input" nbInput placeholder="DD-MM-YYYY" [(ngModel)]="concert.dateStarts">
+                </div>
+
+                <div style="display: block; width: 25%; padding: 15px 0px 15px 15px;">
+                    <p style="margin-top: 35px;">Hora</p>
+                    <input class="row-input" nbInput placeholder="HH:MM" [(ngModel)]="hora">
                 </div>
 
             </div>
@@ -71,7 +76,13 @@
                 </agm-map>
             </div>
 
-            <h4 style="margin-top: 50px; margin-bottom: 25px;">Imagenes de la ubicación</h4>
+            <div style="display: block; width: 100%; padding: 15px 15px 15px 0px;">
+                <p style="margin-top: 35px;">Descripción del lugar</p>
+                <input class="row-input" type="text" placeholder="Descripción del lugar" name="name"
+                    [(ngModel)]="concert.placeDescription">
+            </div>
+
+            <h4 style="margin-top: 10px; margin-bottom: 25px;">Imagenes de la ubicación</h4>
             <p>Puedes subir hasta cuatro imagenes de la ubicación para que los usuarios puedan ver el lugar que se va a
                 dar
                 a cabo el
@@ -96,7 +107,6 @@
                     <label class="register-upload-photo-text" for="choose-photo-place">Sube más imagenes</label>
                     <input type="file" id="choose-photo-place" multiple (change)="fileBrowseHandler($event)" />
                 </div>
-
             </div>
 
             <h4 style="margin-bottom: 25px;">Entradas</h4>
@@ -133,6 +143,7 @@
         </div>
 
         <p *ngIf="errorAlert" style="text-align: center; margin-bottom: 40px; color: rgb(240, 0, 40);">{{errorMessage}}</p>
+        <p *ngIf="successAlert" style="text-align: center; margin-bottom: 40px; color: rgb(30, 39, 161);">{{successMessage}}</p>
         <div style="text-align: center;">
             <button class="login-button" (click)="createConcert()">Crear concierto</button>
         </div>

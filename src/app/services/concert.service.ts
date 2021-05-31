@@ -73,4 +73,16 @@ export class ConcertsService {
       headers,
     });
   }
+
+  registerConcert(concertRegister: ConcertRegister){
+    var headers = new HttpHeaders();
+    headers.append("Content-type", "application/json");
+
+    var userId = JSON.parse(localStorage.getItem("currentUser")).user.id;
+    concertRegister.userId = userId;
+
+    return this.http.post(environment.apiUrl + `concert/create`, concertRegister, {
+      headers,
+    });
+  }
 }
