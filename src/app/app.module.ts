@@ -34,6 +34,7 @@ import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';  
 import { RegisterComponent } from './register/register.component';
 import { MusicStylesService } from './services/music-styles.service';
+import { ConcertRegister } from './services/concert.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, RegisterComponent],
@@ -58,7 +59,7 @@ import { MusicStylesService } from './services/music-styles.service';
     ThemeModule.forRoot(),
     FontAwesomeModule
   ],
-  providers: [AuthorizatedGuard, StorageService, AuthenticationService, MusicStylesService],
+  providers: [AuthorizatedGuard, StorageService, AuthenticationService, MusicStylesService, ConcertRegister],
   bootstrap: [AppComponent],
 })
 export class AppModule {

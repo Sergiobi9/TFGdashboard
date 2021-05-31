@@ -10,11 +10,11 @@
                 <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
                     <p style="margin-top: 35px;">Nombre del concierto</p>
                     <input class="row-input" type="text" placeholder="Nombre del concierto" name="name"
-                        [(ngModel)]="name">
+                        [(ngModel)]="concert.name">
                 </div>
                 <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
                     <p style="margin-top: 35px;">Fecha</p>
-                    <input class="row-input" nbInput placeholder="DD/MM/YYYY">
+                    <input class="row-input" nbInput placeholder="DD/MM/YYYY" [(ngModel)]="concert.dateStarts">
                 </div>
 
             </div>
@@ -23,19 +23,47 @@
                 <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
                     <p>Descripción</p>
                     <textarea class="row-input" type="text" placeholder="Descripción de presentación" name="name"
-                        style="height: 100px;" [(ngModel)]="name"></textarea>
+                        style="height: 100px;" [(ngModel)]="concert.description"></textarea>
                 </div>
                 <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
-                    <p >Descripción extra</p>
+                    <p>Descripción extra</p>
                     <textarea class="row-input" type="text" placeholder="Descripción de presentación extra" name="name"
-                        style="height: 100px;" [(ngModel)]="name"></textarea>
+                        style="height: 100px;" [(ngModel)]="concert.extraDescription"></textarea>
                 </div>
             </div>
 
+            <h4 style="margin-top: 50px; margin-bottom: 25px;">Imagen cover del concierto</h4>
+            <p>Esta imagen sera visible para todos los usuarios y es para identificar</p>
+            <div *ngIf="imagesCover == null"
+                style="width: 60%; height: 200px; border-radius: 20px; border: dotted 1px #828282; display: flex; text-align: center; margin: 35px auto 35px auto; justify-content: center; align-items: center; ">
+                <fa-icon [icon]="faCloudUploadAlt" style="font-size: 40px; color: #828282; margin-right: 20px;">
+                </fa-icon>
+                <label class="register-upload-photo-text" for="choose-photo">Sube imagen</label>
+                <input type="file" id="choose-photo" (change)="fileBrowseHandlerCover($event)" />
+            </div>
+
+            <div *ngIf="imagesCover != null">
+                <div class="row" style="justify-content: center;">
+                    <div class="column" style="border-radius: 20px; margin: 0px 20px 10px 20px;">
+                        <img [src]="imagesCover"
+                            style="width:500px; height: 280px; border-radius:20px; object-fit:cover; margin: 20px;">
+                    </div>
+                </div>
+            
+                <div style="text-align: center;">
+                    <label class="register-upload-photo-text" for="choose-photo">Sube otra imagen</label>
+                    <input type="file" id="choose-photo" (change)="fileBrowseHandlerCover($event)" />
+                </div>
+
+            </div>
+
+            <p style="text-align: center;">Aspect ratio debe ser de 16:9 para una buena calidad</p>
+
             <h4 style="margin-bottom: 25px;">Ubicación</h4>
             <div style="border-radius: 20px;width: 100%; margin-top: 15px;">
-                <input [(ngModel)]="address" placeholder="Buscar lugar" #search autocomplete="off" id="search"
-                    [formControl]="searchControl" class="row-input" style="width: 100%; margin-bottom: 35px;">
+                <input [(ngModel)]="concert.placeAddress" placeholder="Buscar lugar" #search autocomplete="off"
+                    id="search" [formControl]="searchControl" class="row-input"
+                    style="width: 100%; margin-bottom: 35px;">
 
                 <agm-map [latitude]="latitude" [zoom]="zoom" [longitude]="longitude"
                     style="width: 100%; height: 50vh; border-radius: 20px;">
@@ -52,8 +80,8 @@
                 style="width: 60%; height: 200px; border-radius: 20px; border: dotted 1px #828282; display: flex; text-align: center; margin: 35px auto 35px auto; justify-content: center; align-items: center; ">
                 <fa-icon [icon]="faCloudUploadAlt" style="font-size: 40px; color: #828282; margin-right: 20px;">
                 </fa-icon>
-                <label class="register-upload-photo-text" for="choose-photo">Sube imagenes</label>
-                <input type="file" id="choose-photo" multiple (change)="fileBrowseHandler($event)" />
+                <label class="register-upload-photo-text" for="choose-photo-place">Sube imagenes</label>
+                <input type="file" id="choose-photo-place" multiple (change)="fileBrowseHandler($event)" />
             </div>
 
             <div *ngIf="images.length != 0">
@@ -65,8 +93,8 @@
                 </div>
 
                 <div style="text-align: center;">
-                    <label class="register-upload-photo-text" for="choose-photo">Sube más imagenes</label>
-                    <input type="file" id="choose-photo" multiple (change)="fileBrowseHandler($event)" />
+                    <label class="register-upload-photo-text" for="choose-photo-place">Sube más imagenes</label>
+                    <input type="file" id="choose-photo-place" multiple (change)="fileBrowseHandler($event)" />
                 </div>
 
             </div>
@@ -76,11 +104,11 @@
                 <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
                     <p style="margin-top: 35px;">Numero de entradas</p>
                     <input class="row-input" type="number" placeholder="Numero de entradas" name="name"
-                        [(ngModel)]="name">
+                        [(ngModel)]="concert.numberAssistants">
                 </div>
                 <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
                     <p style="margin-top: 35px;">Precio</p>
-                    <input class="row-input" type="number" placeholder="Precio" name="name" [(ngModel)]="name">
+                    <input class="row-input" type="number" placeholder="Precio" name="name" [(ngModel)]="concert.price">
                 </div>
             </div>
             <h4 style="margin-top: 25px; margin-bottom: 20px;">Artistas que participaran</h4>
@@ -104,6 +132,7 @@
             </div>
         </div>
 
+        <p *ngIf="errorAlert" style="text-align: center; margin-bottom: 40px; color: rgb(240, 0, 40);">{{errorMessage}}</p>
         <div style="text-align: center;">
             <button class="login-button" (click)="createConcert()">Crear concierto</button>
         </div>

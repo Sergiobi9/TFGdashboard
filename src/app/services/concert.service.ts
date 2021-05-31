@@ -1,9 +1,26 @@
-import * as AWS from "aws-sdk/global";
-import * as S3 from "aws-sdk/clients/s3";
-import { environment } from "../../../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DateUtilsHelper } from "../../../../utils/date-utils";
+import { environment } from "../../environments/environment";
+import { DateUtilsHelper } from "../../utils/date-utils";
+
+export class ConcertRegister{
+    name = "";
+    latitude= 0;
+    longitude = 0;
+    placeName = "";
+    placeAddress = "";
+    placeDescription = "";
+    dateCreated = "";
+    dateStarts = "";
+    userId = "";
+    price = 0;
+    numberAssistants = 0;
+    description = "";
+    extraDescription = "";
+    finished = false;
+    numberImages = 0;
+    artistsIds = [];
+}
 
 @Injectable()
 export class ConcertsService {

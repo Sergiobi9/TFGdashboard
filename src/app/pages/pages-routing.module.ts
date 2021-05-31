@@ -7,6 +7,7 @@ import { AuthorizatedGuard } from '../guards/authorized.guard';
 import { ConcertsComponent } from './concerts/concerts.component';
 import { NewConcertComponent } from './new-concert/new-concert.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [{
   path: '',
@@ -15,6 +16,10 @@ const routes: Routes = [{
     {
       path: 'home',
       component: HomeComponent,
+    },
+    {
+      path: 'users',
+      component: UsersComponent,
     },
     {
       path: 'concerts',

@@ -16,10 +16,10 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { FormsModule } from '@angular/forms';
 import { ConcertsComponent } from './concerts.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-import { ConcertsService } from './shared/concerts.service';
 import { YearConcertPipe } from './pipe/year-concert.pipe';
 import { DayConcertPipe } from './pipe/date-concert.pipe';
 import { ManageConcert } from './dialog/manage-concert.component';
+import { ConcertsService } from '../../services/concert.service';
 
 @NgModule({
   imports: [

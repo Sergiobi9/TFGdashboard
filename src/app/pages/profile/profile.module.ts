@@ -49,7 +49,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     }),
   ],
   declarations: [
-    ProfileModule,
+    ProfileComponent,
   ],
 })
 export class ProfileModule { }

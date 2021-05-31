@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators' ;
 import { SolarData } from '../../@core/data/solar';
+import { ConcertsService } from '../../services/concert.service';
 import { ManageConcert } from './dialog/manage-concert.component';
-import { ConcertsService } from './shared/concerts.service';
 
 @Component({
   selector: 'ngx-concerts',

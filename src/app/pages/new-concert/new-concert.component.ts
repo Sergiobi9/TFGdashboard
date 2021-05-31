@@ -12,6 +12,8 @@ import { AwsFileUploaderService } from "./shared/aws-file-uploader.service";
 import { ArtistService } from "./shared/artist.service";
 
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { ConcertRegister } from "../../services/concert.service";
+import { DateUtilsHelper } from "../../../utils/date-utils";
 interface CardSettings {
   title: string;
   iconClass: string;
@@ -32,6 +34,13 @@ export class NewConcertComponent implements OnDestroy, OnInit {
   zoom = 9;
 
   locationGranted = true;
+
+  extraDescription = "";
+  description = "";
+  imagesCover =
+    "https://s3.amazonaws.com/media.thecrimson.com/photos/2020/04/02/211518_1343746.jpg";
+
+  concert = new ConcertRegister();
 
   private geoCoder;
   images = [];
@@ -112,12 +121,50 @@ export class NewConcertComponent implements OnDestroy, OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
+
+          console.log(place);
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.address = place.formatted_address;
+
+          this.concert.latitude = this.latitude;
+          this.concert.longitude = this.longitude;
+          this.concert.placeAddress = this.address;
+          this.concert.placeName = place.name;
         });
       });
     });
+  }
+
+  fileBrowseHandlerCover($event: any) {
+    console.log("hello");
+    var that = this;
+
+    var currentFile = $event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (event) {
+      var file: any =
+        event !== null && event.target !== null ? event.target.result : "";
+      var size: any = event !== null ? event.total : 0;
+
+      if (
+        !file.toUpperCase().includes("JPEG") &&
+        !file.toUpperCase().includes("PNG") &&
+        !file.toUpperCase().includes("JPG")
+      ) {
+        console.log(
+          "This image is not a PNG, JPG or JPEG format. Please choose another file."
+        );
+        return;
+      } else if (size > that.fileMaxSizeAllowed) {
+        console.log(
+          "This image is to big. File size limit is 1MB. Please choose another file"
+        );
+        return;
+      }
+      that.imagesCover = file;
+    };
+    reader.readAsDataURL(currentFile);
   }
 
   fileBrowseHandler($event: any) {
@@ -254,8 +301,82 @@ export class NewConcertComponent implements OnDestroy, OnInit {
 
   ngOnDestroy() {}
 
+  errorAlert = true;
+  errorMessage = "Hello";
+
+  hideErrorMessage() {
+    this.errorAlert = false;
+  }
+
+  showErrorMessage(message) {
+    this.errorAlert = true;
+    this.errorMessage = message;
+  }
+
   imageUrl =
     "https://concerts-images-tfg.s3.us-east-2.amazonaws.com/605bc026b2d5497a8393bf0b_0.png";
 
-  createConcert() {}
+  createConcert() {
+    this.hideErrorMessage();
+
+    var errors = this.checkInputs();
+
+    if (errors){ return }
+
+    var artistsIds = [];
+    for (let i = 0; i < this.allArtists.length; i++) {
+      if (this.allArtists[i].opacity == 0.5) {
+        artistsIds.push(this.allArtists[i].artistId);
+      }
+    }
+
+    this.concert.artistsIds = artistsIds;
+
+    console.log(this.concert)
+  }
+
+  checkInputs() {
+    console.log(this.concert.dateStarts)
+    if (this.concert.name === "") {
+      this.showErrorMessage("Por favor, pon un nombre a tu concierto");
+      return true;
+    } else if (this.concert.dateStarts === "") {
+      this.showErrorMessage("Por favor, pon una fecha a tu concierto");
+      return true;
+    } else if (!DateUtilsHelper.checkDateFormat(this.concert.dateStarts)) {
+      this.showErrorMessage(
+        "Por favor, pon una fecha valida con formato DD/MM/YYYY tu concierto"
+      );
+      return true;
+    } else if (
+      this.imagesCover == null ||
+      this.imagesCover ==
+        "https://s3.amazonaws.com/media.thecrimson.com/photos/2020/04/02/211518_1343746.jpg"
+    ) {
+      this.showErrorMessage(
+        "Por favor, selecciona una foto cover para tu concierto"
+      );
+      return true;
+    } else if (
+     this.concert.placeName == ""
+    ) {
+      this.showErrorMessage(
+        "Por favor, escribe una ubicación en la que se va a dar lugar el concierto"
+      );
+      return true;
+    } else if (
+      this.concert.numberAssistants < 0
+     ) {
+       this.showErrorMessage(
+         "Por favor, selecciona un numero de asistentes valido"
+       );
+       return true;
+     } else if (
+      this.concert.price < 0 || this.concert.price == null
+     ) {
+       this.concert.price = 0;
+     }
+
+     return false;
+  }
 }
