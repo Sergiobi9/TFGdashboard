@@ -25,7 +25,7 @@ export class DateUtilsHelper {
       var month = splitedDate[1];
       var day = splitedDate[0];
 
-      return moment(day +"-"+ month +"-"+ year, 'DD-MM-YYYY',true).isValid();
+      return moment(year +"-"+ month +"-"+ day, 'YYYY-MM-DD',true).isValid();
 
     } else return false;
   }

@@ -1,7 +1,7 @@
 <div class="col-md-12" style="display: flex;">
   <div class="col-md-4">
     <h1>Buenos días <br>{{artistName}}</h1>
-    <h5 style="text-align: center;">Tu proximo concierto es el 12 de Mayo de 2021</h5>
+    <h5 *ngIf="nextConcert.id !== null" style="text-align: center;">Tu proximo concierto es {{nextConcert.name}} el {{nextConcert.dateStarts | nextConcertDate}}</h5>
     <div style="margin-top: 50px; text-align: center;">
       <button class="login-button" (click)="createConcert()">Nuevo concierto</button>
     </div>

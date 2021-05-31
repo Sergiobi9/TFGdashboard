@@ -19,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookedTicketsPipe } from './pipe/booked-tickets.pipe';
 import { FirstNameLetterPipe } from './pipe/first-name-letter.pipe';
 import { ConcertRatePipe } from './pipe/concert-rate.pipe';
+import { NextConcertDate } from './pipe/next-concert-date.pipe';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { ConcertRatePipe } from './pipe/concert-rate.pipe';
     HomeComponent,
     BookedTicketsPipe,
     FirstNameLetterPipe,
-    ConcertRatePipe
+    ConcertRatePipe,
+    NextConcertDate
   ],
 })
 export class HomeModule { }

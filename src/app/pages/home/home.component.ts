@@ -11,6 +11,7 @@ import { faStar as outlineStar} from '@fortawesome/free-regular-svg-icons';
 import { HttpClient } from '@angular/common/http';
 import { combineLatest } from 'rxjs';
 import {registerMap} from 'echarts'
+import { ConcertsService } from '../../services/concert.service';
 
 interface CardSettings {
   title: string;
@@ -22,7 +23,7 @@ interface CardSettings {
   selector: 'ngx-home',
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
-  providers:[HomeService]
+  providers:[HomeService, ConcertsService]
 })
 export class HomeComponent implements OnDestroy {
 
@@ -31,6 +32,7 @@ export class HomeComponent implements OnDestroy {
   outlineStar = outlineStar;
 
   rating = 3.5;
+  nextConcert;
 
   private alive = true;
   userId = JSON.parse(localStorage.getItem('currentUser')).user.id;
@@ -47,13 +49,19 @@ export class HomeComponent implements OnDestroy {
 
   constructor(private router: Router, private homeService: HomeService,
     private http: HttpClient,
-    private theme: NbThemeService) {
+    private theme: NbThemeService,
+    private concertsService: ConcertsService) {
     this.imageUrl = "https://artists-tfg.s3.us-east-2.amazonaws.com/" + this.userId + ".png";
 
     this.homeService.getUserConcertsActivityByArtist().pipe().subscribe((data: any)=>{
       console.log(data)
       this.activity = data;
       this.activity = this.activity.slice(0, 5);
+    });
+
+    this.concertsService.getArtistNextConcert().pipe().subscribe((data: any)=>{
+      console.log(data)
+      this.nextConcert = data;
     });
 
     this.generateMap();

@@ -405,7 +405,7 @@ export class NewConcertComponent implements OnDestroy, OnInit {
       return true;
     } else if (!DateUtilsHelper.checkDateFormat(this.concert.dateStarts)) {
       this.showErrorMessage(
-        "Por favor, pon una fecha valida con formato DD-MM-YYY tu concierto"
+        "Por favor, pon una fecha valida con formato YYYY-MM-DD tu concierto"
       );
       return true;
     } else if (this.hora === "" ) {
