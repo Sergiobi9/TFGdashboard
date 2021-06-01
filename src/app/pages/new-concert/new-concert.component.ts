@@ -369,6 +369,8 @@ export class NewConcertComponent implements OnDestroy, OnInit {
     this.concert.numberImages = this.images.length;
     this.concert.artistsIds = artistsIds;
 
+    this.concert.concertIntervalPricing = this.tickets;
+
     var dateStarts = this.concert.dateStarts;
     this.concert.dateStarts =
       this.concert.dateStarts + " " + this.hora + ":00.000+0100";
@@ -441,7 +443,7 @@ export class NewConcertComponent implements OnDestroy, OnInit {
   }
 
   successRegister() {
-    this.showErrorMessage(
+    this.showSuccessMessage(
       "Concierto registrado correctamente. Redirigiendote a conciertos .."
     );
     setTimeout(() => {

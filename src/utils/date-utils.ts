@@ -1,7 +1,9 @@
-import * as moment from "moment";
-import { min } from "rxjs/operators";
+import * as moment from 'moment';
+import { min } from 'rxjs/operators';
 
 export class DateUtilsHelper {
+
+
   static timeStamp() {
     var date = new Date();
 
@@ -14,45 +16,33 @@ export class DateUtilsHelper {
     return year + "-" + monthFixed + "-" + dayFixed + " 00:00:00.000+0100";
   }
 
-  static checkDateFormat(date: string) {
-    if (date != null && date.includes("-")) {
-      var splitedDate = date.split("-");
-      console.log(splitedDate);
+  static checkDateFormat(date:string){
+    if (date != null && date.includes('-')){
+      var splitedDate = date.split('-');
+      console.log(splitedDate)
 
-      var year = splitedDate[2];
+      var year = splitedDate[0]
       var month = splitedDate[1];
-      var day = splitedDate[0];
+      var day = splitedDate[2];
 
-      console.log(year);
-      console.log(month);
-      console.log(day);
+      console.log(year)
+      console.log(month)
+      console.log(day)
 
-      if (year != null && year.length == 4) {
-        if (month != null && month.length == 2) {
-          if (day != null && day.length == 2) {
-            return true;
-          }
-        }
-      }
+      return moment(year +"-"+ month +"-"+ day, 'YYYY-MM-DD',true).isValid();
 
-      return false;
     } else return false;
   }
 
-  static checkHourFormat(hour: string) {
-    if (hour != null && hour.includes(":")) {
-      var splitedDate = hour.split(":");
-      console.log(splitedDate);
+  static checkHourFormat(hour: string){
+    if (hour != null &&hour.includes(':')){
+      var splitedDate = hour.split(':');
+      console.log(splitedDate)
 
-      var hour = splitedDate[0];
+      var hour = splitedDate[0]
       var minutes = splitedDate[1];
 
-      return (
-        Number(hour) < 24 &&
-        Number(hour) >= 0 &&
-        Number(minutes) < 60 &&
-        Number(minutes) >= 0
-      );
+      return Number(hour) < 24 && Number(hour) >= 0 && Number(minutes) < 60 && Number(minutes) >= 0
     } else return false;
   }
 }
