@@ -21,7 +21,6 @@ export const routes: Routes = [
   },
   {
     path: "auth",
-    component: NbAuthComponent,
     children: [
       {
         path: "",

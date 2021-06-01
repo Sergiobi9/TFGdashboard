@@ -18,43 +18,43 @@
 </head>
 
 <body>
-  <ngx-app></ngx-app>
-
-  <style>
-    .container {
-      display: flex;
-      height: 100vh;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .loader {
-      height: 100px;
-      width: 100px;
-    }
-
-    .loader svg circle {
-      --stroke: 0;
-      fill: none;
-      stroke: black;
-      stroke-width: 10;
-      stroke-dasharray: var(--circumference);
-      stroke-dashoffset: var(--stroke);
-    }
-
-    .loading-svg {
-      transform: rotate(-90deg);
-    }
-  </style>
-
-  <div class="container">
-    <div class="loader">
-      <svg class="loading-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="40" />
-      </svg>
+  <ngx-app>
+    <style>
+      .container {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .loader {
+        height: 100px;
+        width: 100px;
+      }
+  
+      .loader svg circle {
+        --stroke: 0;
+        fill: none;
+        stroke: black;
+        stroke-width: 10;
+        stroke-dasharray: var(--circumference);
+        stroke-dashoffset: var(--stroke);
+      }
+  
+      .loading-svg {
+        transform: rotate(-90deg);
+      }
+    </style>
+  
+    <div class="container">
+      <div class="loader">
+        <svg class="loading-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="40" />
+        </svg>
+      </div>
     </div>
-  </div>
+  </ngx-app>
 
 </body>
 

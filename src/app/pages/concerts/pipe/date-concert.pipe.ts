@@ -12,7 +12,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 @Pipe({ name: "dateConcertPipe" })
 export class DayConcertPipe implements PipeTransform {
 
-    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
   transform(concertDate: string) {
       var date = new Date(concertDate);
