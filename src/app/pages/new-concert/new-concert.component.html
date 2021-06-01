@@ -54,7 +54,7 @@
                             style="width:500px; height: 280px; border-radius:20px; object-fit:cover; margin: 20px;">
                     </div>
                 </div>
-            
+
                 <div style="text-align: center;">
                     <label class="register-upload-photo-text" for="choose-photo">Sube otra imagen</label>
                     <input type="file" id="choose-photo" (change)="fileBrowseHandlerCover($event)" />
@@ -110,17 +110,43 @@
             </div>
 
             <h4 style="margin-bottom: 25px;">Entradas</h4>
-            <div style="display: flex; width: 100%;">
-                <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
-                    <p style="margin-top: 35px;">Numero de entradas</p>
-                    <input class="row-input" type="number" placeholder="Numero de entradas" name="name"
-                        [(ngModel)]="concert.numberAssistants">
+            <p style="margin-bottom: 25px;">Añade diferentes tipos de entradas y precios</p>
+
+            <div *ngFor="let ticket of tickets">
+                <div style="display: flex; margin-bottom: 20px; align-items: center; cursor: pointer;">
+                    <h6 style="margin-bottom: 0px; width: 100%;">Tipo: {{ticket.name}}</h6>
+                    <fa-icon [icon]="faTimes" style="color:red; font-size: 20px;" (click)="removePricing()"></fa-icon>
                 </div>
-                <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
-                    <p style="margin-top: 35px;">Precio</p>
-                    <input class="row-input" type="number" placeholder="Precio" name="name" [(ngModel)]="concert.price">
+                <div style="display: block;">
+                    <div style="display: flex; width: 100%;">
+                        <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
+                            <p>Nombre</p>
+                            <input class="row-input" type="text" placeholder="VIP, estandard .." name="ticketName"
+                                [(ngModel)]="ticket.name">
+                        </div>
+                        <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
+                            <p >Descripción</p>
+                            <input class="row-input" type="text" placeholder="Con entrada VIP barra libre incluida" name="ticketDescription"
+                                [(ngModel)]="ticket.description">
+                        </div>
+                    </div>
+                    <div style="display: flex; width: 100%;">
+                        <div style="display: block; width: 50%; padding: 15px 15px 15px 0px;">
+                            <p>Numero de entradas</p>
+                            <input class="row-input" type="number" placeholder="Numero de entradas" name="ticketNumber"
+                                [(ngModel)]="ticket.numberTickets">
+                        </div>
+                        <div style="display: block; width: 50%; padding: 15px 0px 15px 15px;">
+                            <p>Precio</p>
+                            <input class="row-input" type="number" placeholder="Precio" name="ticketPrice"
+                                [(ngModel)]="ticket.cost">
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <p style="margin-bottom: 50px; cursor: pointer; text-align: center; font-weight: 1000;" (click)="addPricingInterval()">Añadir nueva franja de precios</p>
+
             <h4 style="margin-top: 25px; margin-bottom: 20px;">Artistas que participaran</h4>
 
             <input class="row-input" type="text" placeholder="Buscar artista" name="artist"
@@ -142,8 +168,10 @@
             </div>
         </div>
 
-        <p *ngIf="errorAlert" style="text-align: center; margin-bottom: 40px; color: rgb(240, 0, 40);">{{errorMessage}}</p>
-        <p *ngIf="successAlert" style="text-align: center; margin-bottom: 40px; color: rgb(30, 39, 161);">{{successMessage}}</p>
+        <p *ngIf="errorAlert" style="text-align: center; margin-bottom: 40px; color: rgb(240, 0, 40);">{{errorMessage}}
+        </p>
+        <p *ngIf="successAlert" style="text-align: center; margin-bottom: 40px; color: rgb(30, 39, 161);">
+            {{successMessage}}</p>
         <div style="text-align: center;">
             <button class="login-button" (click)="createConcert()">Crear concierto</button>
         </div>

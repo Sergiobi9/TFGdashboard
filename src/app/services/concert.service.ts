@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { DateUtilsHelper } from "../../utils/date-utils";
+import { TicketsPricingInterval } from "../pages/new-concert/new-concert.component";
 
 export class ConcertRegister{
     name = "";
@@ -13,12 +14,11 @@ export class ConcertRegister{
     dateCreated = "";
     dateStarts = "";
     userId = "";
-    price = 0;
-    numberAssistants = 0;
     description = "";
     extraDescription = "";
     finished = false;
     numberImages = 0;
+    concertIntervalPricing: TicketsPricingInterval[]= []
     artistsIds = [];
 }
 

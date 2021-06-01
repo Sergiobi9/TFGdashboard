@@ -10,18 +10,7 @@ import { UserData } from "../../../@core/data/users";
 import { LayoutService } from "../../../@core/utils";
 import { map, takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
-import {
-  faVial,
-  faBuilding,
-  faHeartbeat,
-  faUserTie,
-  faUsers,
-  faQuestion,
-  faHome,
-  faClipboardList,
-  faMicrophoneAlt,
-  faFire,
-} from "@fortawesome/free-solid-svg-icons";
+
 import { Router } from "@angular/router";
 import { StorageService } from "../../../services/storage.service";
 
@@ -35,17 +24,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
-
-  faVial = faVial;
-  faUsers = faUsers;
-  faBuilding = faBuilding;
-  faHeartbeat = faHeartbeat;
-  faUserTie = faUserTie;
-  faQuestion = faQuestion;
-  faHome = faHome;
-  faClipboardList = faClipboardList;
-  faMicrophoneAlt = faMicrophoneAlt;
-  faFire = faFire;
 
   themes = [
     {

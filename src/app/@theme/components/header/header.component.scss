@@ -98,3 +98,7 @@
     background-position: center center !important;
     background-repeat: no-repeat !important;
 }
+
+::ng-deep .fixed{
+  box-shadow: none !important;
+}

@@ -12,12 +12,22 @@ import { AwsFileUploaderService } from "./shared/aws-file-uploader.service";
 import { ArtistService } from "./shared/artist.service";
 
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { ConcertRegister, ConcertsService } from "../../services/concert.service";
+import {
+  ConcertRegister,
+  ConcertsService,
+} from "../../services/concert.service";
 import { DateUtilsHelper } from "../../../utils/date-utils";
-interface CardSettings {
-  title: string;
-  iconClass: string;
-  type: string;
+
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
+export class TicketsPricingInterval {
+  id: string;
+  name: string;
+  description: string;
+  numberTickets: Number;
+  cost: Number;
+  discountApplied: Number;
+  concertId: string;
 }
 
 @Component({
@@ -32,6 +42,10 @@ export class NewConcertComponent implements OnDestroy, OnInit {
   longitude = -99.653015;
   address = "";
   zoom = 9;
+
+  faTimes = faTimes;
+
+  tickets = [];
 
   hora;
 
@@ -79,6 +93,16 @@ export class NewConcertComponent implements OnDestroy, OnInit {
 
         console.log(this.artists);
       });
+
+    this.tickets.push(new TicketsPricingInterval());
+  }
+
+  removePricing(position) {
+    if (this.tickets.length <= 1) {
+      return;
+    } else {
+      this.tickets.splice(position, 1);
+    }
   }
 
   faCheckCircle = faCheckCircle;
@@ -105,6 +129,10 @@ export class NewConcertComponent implements OnDestroy, OnInit {
     }
 
     console.log(this.allArtists);
+  }
+
+  addPricingInterval() {
+    this.tickets.push(new TicketsPricingInterval());
   }
 
   getPlaceAutocomplete() {
@@ -327,7 +355,9 @@ export class NewConcertComponent implements OnDestroy, OnInit {
 
     var errors = this.checkInputs();
 
-    if (errors){ return }
+    if (errors) {
+      return;
+    }
 
     var artistsIds = [];
     for (let i = 0; i < this.allArtists.length; i++) {
@@ -340,37 +370,60 @@ export class NewConcertComponent implements OnDestroy, OnInit {
     this.concert.artistsIds = artistsIds;
 
     var dateStarts = this.concert.dateStarts;
-    this.concert.dateStarts = this.concert.dateStarts + " " + this.hora + ":00.000+0100";
+    this.concert.dateStarts =
+      this.concert.dateStarts + " " + this.hora + ":00.000+0100";
     this.concert.dateCreated = DateUtilsHelper.timeStamp();
 
-    this.showSuccessMessage("Creando concierto, por favor espera")
+    this.showSuccessMessage("Creando concierto, por favor espera");
 
-    if (!this.block){
+    if (!this.block) {
       this.block = true;
-      this.concertService.registerConcert(this.concert).pipe().subscribe((data:any)=>{
-        this.concert.dateStarts = dateStarts;
-        var concertId = data.id;
-        this.showSuccessMessage("Concierto creado. Por favor espera, se esta subiendo la imagen cover.")
-        this.awsFileUploaderService.uploadConcertImageToS3(this.imagesCover, concertId, this)
-      }, err =>{
-        this.block = false;
-        this.concert.dateStarts = dateStarts;
-        this.showErrorMessage("Vaya algo ha ido mal creando el concierto, prueba de nuevo más tarde")
-      });
+      this.concertService
+        .registerConcert(this.concert)
+        .pipe()
+        .subscribe(
+          (data: any) => {
+            this.concert.dateStarts = dateStarts;
+            var concertId = data.id;
+            this.showSuccessMessage(
+              "Concierto creado. Por favor espera, se esta subiendo la imagen cover."
+            );
+            this.awsFileUploaderService.uploadConcertImageToS3(
+              this.imagesCover,
+              concertId,
+              this
+            );
+          },
+          (err) => {
+            this.block = false;
+            this.concert.dateStarts = dateStarts;
+            this.showErrorMessage(
+              "Vaya algo ha ido mal creando el concierto, prueba de nuevo más tarde"
+            );
+          }
+        );
     }
   }
 
-  uploadConcertPlaceImages(id){
-    if (this.images != null && this.images.length == 0){
+  uploadConcertPlaceImages(id) {
+    if (this.images != null && this.images.length == 0) {
       this.successRegister();
-    } else {
-      this.showSuccessMessage("Por favor espera, se estan subiendo las imagenes del sitio del concierto")
-      for (let i = 0; i < this.images.length; i++){
+    } else {
+      this.showSuccessMessage(
+        "Por favor espera, se estan subiendo las imagenes del sitio del concierto"
+      );
+      for (let i = 0; i < this.images.length; i++) {
         var file = this.images[i];
-  
-        var isLastItem = i == this.images.length-1;
-        this.awsFileUploaderService.uploadConcertPlaceImagesToS3(file, id, i, isLastItem, this)
-      }  
+
+        var isLastItem = i == this.images.length - 1;
+        this.awsFileUploaderService.uploadConcertPlaceImagesToS3(
+          file,
+          id,
+          i,
+          isLastItem,
+          this
+        );
+      }
     }
   }
 
@@ -387,16 +440,17 @@ export class NewConcertComponent implements OnDestroy, OnInit {
     this.errorAlert = false;
   }
 
-
-  successRegister(){
-    this.showErrorMessage("Concierto registrado correctamente. Redirigiendote a conciertos ..")
+  successRegister() {
+    this.showErrorMessage(
+      "Concierto registrado correctamente. Redirigiendote a conciertos .."
+    );
     setTimeout(() => {
       this.router.navigate(["/pages/concerts"]);
     }, 1000);
   }
 
   checkInputs() {
-    console.log(this.concert.dateStarts)
+    console.log(this.concert.dateStarts);
     if (this.concert.name === "") {
       this.showErrorMessage("Por favor, pon un nombre a tu concierto");
       return true;
@@ -408,7 +462,7 @@ export class NewConcertComponent implements OnDestroy, OnInit {
         "Por favor, pon una fecha valida con formato YYYY-MM-DD tu concierto"
       );
       return true;
-    } else if (this.hora === "" ) {
+    } else if (this.hora === "") {
       this.showErrorMessage("Por favor, pon una hora de inicio a tu concierto");
       return true;
     } else if (!DateUtilsHelper.checkHourFormat(this.hora)) {
@@ -425,26 +479,35 @@ export class NewConcertComponent implements OnDestroy, OnInit {
         "Por favor, selecciona una foto cover para tu concierto"
       );
       return true;
-    } else if (
-     this.concert.placeName == ""
-    ) {
+    } else if (this.concert.placeName == "") {
       this.showErrorMessage(
         "Por favor, escribe una ubicación en la que se va a dar lugar el concierto"
       );
       return true;
-    } else if (
-      this.concert.numberAssistants < 0
-     ) {
-       this.showErrorMessage(
-         "Por favor, selecciona un numero de asistentes valido"
-       );
-       return true;
-     } else if (
-      this.concert.price < 0 || this.concert.price == null
-     ) {
-       this.concert.price = 0;
-     }
+    } else if (this.tickets.length >= 1) {
+      for (let i = 0; i < this.tickets.length; i++) {
+        var name = this.tickets[i].name;
+        var numberTickets = this.tickets[i].numberTickets;
+        var cost = this.tickets[i].cost;
+        if (name == "") {
+          this.showErrorMessage(
+            "Por favor, añade un nombre al tipo de entrada"
+          );
+          return true;
+        }
+        if (numberTickets <= 0) {
+          this.showErrorMessage(
+            "Por favor, añade un número de entradas valido"
+          );
+          return true;
+        }
+        if (cost < 0) {
+          this.showErrorMessage("Por favor, añade un coste de entradas valido");
+          return true;
+        }
+      }
+    }
 
-     return false;
+    return false;
   }
 }
